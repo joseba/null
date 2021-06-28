@@ -80,6 +80,9 @@ cryptsetup --allow-discards --perf-no_read_workqueue --perf-no_write_workqueue -
 
 # Formatting the partitions
 echo "Formatting the partitions"
+mkfs.vfat -F32 -n "EFI"  ${DISK}1
+mkfs.btrfs -L ROOT /dev/mapper/crypt
+
 
 
 

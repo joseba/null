@@ -145,7 +145,9 @@ chattr +C /mnt/@/cryptkey
 
 kernel_selector
 
-
+# Pacstrap (setting up a base sytem onto the new root).
+echo "Installing the base system (it may take a while)."
+pacstrap /mnt base base-devel ${kernel} ${kernel}-headers ${microcode} linux-firmware 
 
 cryptsetup close crypt
 

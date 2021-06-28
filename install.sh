@@ -54,6 +54,7 @@ if [[ "$response" =~ ^(yes|y)$ ]]
 then
     wipefs -af "$DISK" &>/dev/null
     echo YES | sgdisk --zap-all "$DISK" &>/dev/null
+    cryptsetup erase "$DISK" 
     cryptsetup open --type plain -d /dev/urandom "$DISK" wipe
     #dd if=/dev/zero of=/dev/mapper/wipe status=progress bs=1M count=10000
     sync

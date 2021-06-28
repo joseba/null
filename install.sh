@@ -148,7 +148,7 @@ chattr +C /mnt/@/cryptkey
 
 # Pacstrap (setting up a base sytem onto the new root).
 echo "Installing the base system (it may take a while)."
-pacstrap /mnt base base-devel linux linux-headers linux-firmware iwd btrfs-progs vim \
+pacstrap /mnt base base-devel linux $microcode linux-headers linux-firmware iwd btrfs-progs vim \
     tmux htop arch-wiki-docs 
 
 

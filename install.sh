@@ -102,7 +102,7 @@ mount -o $btrfs_o,autodefrag,discard=async,nodatacow,subvol=@var_log $BTRFS /mnt
 chattr +C /mnt/var/log
 mkdir /mnt/boot
 mount $EFI /mnt/boot/
-exit
+
 
 # Pacstrap (setting up a base sytem onto the new root).
 echo "Installing the base system (it may take a while)."

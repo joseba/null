@@ -48,16 +48,16 @@ do
 done
 
 # Deleting old partition scheme.
-    wipefs -af "$DISK" 
-    echo YES | sgdisk --zap-all "$DISK"
-    cryptsetup close crypt
-    cryptsetup erase "$DISK" 
-    cryptsetup open --type plain -d /dev/urandom "$DISK" wipe
-    dd if=/dev/zero of=/dev/mapper/wipe status=progress bs=1M count=2000
-    sync
-    cryptsetup close wipe
-    sleep 1
-    cryptsetup erase "$DISK" 
+wipefs -af "$DISK" 
+echo YES | sgdisk --zap-all "$DISK"
+cryptsetup close crypt
+cryptsetup erase "$DISK" 
+cryptsetup open --type plain -d /dev/urandom "$DISK" wipe
+dd if=/dev/zero of=/dev/mapper/wipe status=progress bs=1M count=2000
+sync
+cryptsetup close wipe
+sleep 1
+cryptsetup erase "$DISK" 
 
 # Creating a new partition scheme.
 echo "Creating new partition scheme on $DISK."

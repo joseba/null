@@ -85,6 +85,8 @@ mkfs.btrfs -L ROOT /dev/mapper/crypt
 
 # Creating BTRFS subvolumes.
 echo "Creating BTRFS subvolumes."
+BTRFS="/dev/mapper/crypt
+mount $BTRFS /mnt
 btrfs subvolume create /mnt/@ &>/dev/null
 btrfs subvolume create /mnt/@/.snapshots &>/dev/null
 mkdir -p /mnt/@/.snapshots/1 &>/dev/null
@@ -118,7 +120,7 @@ btrfs subvolume list /mnt
 read
 
 
-BTRFS="/dev/mapper/crypt
+
 
 chattr +C /mnt/@/boot
 chattr +C /mnt/@/srv

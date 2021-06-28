@@ -98,7 +98,7 @@ btrfs su cr /mnt/@var_log &>/dev/null
 # Mounting the newly created subvolumes.
 umount /mnt
 echo "Mounting the newly created subvolumes."
-
+$btrfs_o="ssd,noatime,space_cache,compress=zstd,autodefrag,
 mount -o ssd,noatime,space_cache,compress=zstd,subvol=@ $BTRFS /mnt
 mkdir -p /mnt/{home,.snapshots,/var/log,boot}
 mount -o ssd,noatime,space_cache.compress=zstd,autodefrag,discard=async,subvol=@home $BTRFS /mnt/home

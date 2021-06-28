@@ -120,6 +120,16 @@ read
 
 BTRFS="/dev/mapper/crypt
 
+chattr +C /mnt/@/boot
+chattr +C /mnt/@/srv
+chattr +C /mnt/@/var_log
+chattr +C /mnt/@/var_crash
+chattr +C /mnt/@/var_cache
+chattr +C /mnt/@/var_tmp
+chattr +C /mnt/@/var_spool
+chattr +C /mnt/@/var_lib_libvirt_images
+chattr +C /mnt/@/cryptkey
+
 
 cryptsetup close crypt
 

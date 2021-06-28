@@ -63,5 +63,8 @@ fi
 
 # Creating a new partition scheme.
 echo "Creating new partition scheme on $DISK."
-
+sgdisk --clear \
+         --new=1:0:+550MiB --typecode=1:ef00 --change-name=1:EFI 
+         --new=3:0:0       --typecode=3:8300 --change-name=3:cryptsystem \
+           $DRIVE
 

@@ -83,8 +83,8 @@ echo "Formatting the partitions"
 mkfs.vfat -F32 -n "EFI"  ${DISK}1
 mkfs.btrfs -L ROOT /dev/mapper/crypt
 
-
-
+# Creating BTRFS subvolumes.
+echo "Creating BTRFS subvolumes."
 
 
 

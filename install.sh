@@ -1,5 +1,14 @@
 #!/usr/bin/env -S bash -e
 
+
+
+# Generate the fstab file
+echo "Generating fstab..."
+genfstab -U /mnt > /mnt/etc/fstab
+
+
+exit
+
 # Update the system clock
 timedatectl set-ntp true
 

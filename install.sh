@@ -48,10 +48,6 @@ do
 done
 
 # Deleting old partition scheme.
-read -r -p "This will delete the current partition table on $DISK. Do you agree [y/N]? " response
-response=${response,,}
-if [[ "$response" =~ ^(yes|y)$ ]]
-then
     wipefs -af "$DISK" 
     echo YES | sgdisk --zap-all "$DISK"
     cryptsetup close crypt
@@ -62,10 +58,6 @@ then
     cryptsetup close wipe
     sleep 1
     cryptsetup erase "$DISK" 
-else
-    echo "Quitting."
-    exit
-fi
 
 # Creating a new partition scheme.
 echo "Creating new partition scheme on $DISK."

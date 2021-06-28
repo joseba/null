@@ -7,6 +7,12 @@ echo "Generating fstab..."
 genfstab -L /mnt > /mnt/etc/fstab
 
 
+
+
+
+systemctl enable iwd --root=/mnt &>/dev/null
+
+
 exit
 
 # Update the system clock

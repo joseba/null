@@ -103,7 +103,6 @@ btrfs subvolume create /mnt/@/var_spool &>/dev/null
 btrfs subvolume create /mnt/@/var_lib_libvirt_images &>/dev/null
 btrfs subvolume create /mnt/@/cryptkey &>/dev/null
 btrfs subvolume set-default "$(btrfs subvolume list /mnt | grep "@/.snapshots/1/snapshot" | grep -oP '(?<=ID )[0-9]+')" /mnt
-
 cat << 'EOF' >> /mnt/@/.snapshots/1/info.xml
 <?xml version="1.0"?>
 <snapshot>
@@ -114,10 +113,9 @@ cat << 'EOF' >> /mnt/@/.snapshots/1/info.xml
   <cleanup>number</cleanup>
 </snapshot>
 EOF
-
 chmod 600 /mnt/@/.snapshots/1/info.xml
-btrfs subvolume list /mnt 
-read
+
+
 
 
 chattr +C /mnt/@/boot

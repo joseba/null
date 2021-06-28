@@ -100,8 +100,8 @@ partprobe "$DISK"
 
 # Encrypt system partition
 echo "Encrypting system partition"
-echo $PASS | cryptsetup -q luksFormat --perf-no_read_workqueue --perf-no_write_workqueue --type luks2 --cipher aes-xts-plain64 --key-size 512 --iter-time 2000 --pbkdf argon2id --hash sha3-512 ${DISK}2
-echo $PASS | cryptsetup --allow-discards --perf-no_read_workqueue --perf-no_write_workqueue --persistent open ${DISK}2 crypt
+echo $PASS | cryptsetup -q luksFormat --perf-no_read_workqueue --perf-no_write_workqueue --type luks2 --cipher aes-xts-plain64 --key-size 512 --iter-time 2000 --pbkdf argon2id --hash sha3-512 ${DISK}2 -
+echo $PASS | cryptsetup --allow-discards --perf-no_read_workqueue --perf-no_write_workqueue --persistent open ${DISK}2 crypt -
 
 # Formatting the partitions
 echo "Formatting the partitions"

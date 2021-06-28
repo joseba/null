@@ -109,6 +109,7 @@ pacstrap /mnt base base-devel linux $microcode linux-headers linux-firmware iwd 
     tmux htop arch-wiki-docs snapper sudo apparmor reflector
 
 
+
 #cryptsetup close crypt
 
 

@@ -85,7 +85,7 @@ mkfs.btrfs -L ROOT /dev/mapper/crypt
 
 # Creating BTRFS subvolumes.
 echo "Creating BTRFS subvolumes."
-
+BTRFS="/dev/mapper/crypt
 
 
 cryptsetup close crypt

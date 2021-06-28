@@ -51,6 +51,8 @@ if [[ "$response" =~ ^(yes|y)$ ]]
 then
     wipefs -af "$DISK" &>/dev/null
     sgdisk -Zo "$DISK" &>/dev/null
+    cryptsetup open --type plain -d /dev/urandom "$DISK" wipe
+    
 else
     echo "Quitting."
     exit

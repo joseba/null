@@ -7,6 +7,11 @@ echo "Generating fstab..."
 genfstab -L /mnt > /mnt/etc/fstab
 
 
+# Chroot into the system
+arch-chroot /mnt /bin/bash <<EOF
+# Set the time zone
+echo "Setting time zone..."
+ln -sf /usr/share/zoneinfo/Europe/Madrid /etc/localtime
 
 
 

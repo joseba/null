@@ -119,7 +119,6 @@ chmod 600 /mnt/@/.snapshots/1/info.xml
 umount /mnt
 echo "Mounting the newly created subvolumes."
 mount -o ssd,noatime,space_cache,compress=zstd:15 $BTRFS /mnt
-mkdir 
 mount -o x-mount.mkdir,ssd,noatime,space_cache,autodefrag,compress=zstd:15,discard=async,subvol=@/boot $BTRFS /mnt/boot
 mount -o x-mount.mkdir,ssd,noatime,space_cache,autodefrag,compress=zstd:15,discard=async,subvol=@/root $BTRFS /mnt/root 
 mount -o x-mount.mkdir,ssd,noatime,space_cache.autodefrag,compress=zstd:15,discard=async,subvol=@/home $BTRFS /mnt/home

@@ -75,6 +75,9 @@ partprobe "$DISK"
 
 # Encrypt system partition
 echo "Encrypting system partition"
+cryptsetup luksFormat --perf-no_read_workqueue --perf-no_write_workqueue --type luks2 --cipher aes-xts-plain64 --key-size 512 --iter-time 2000 --pbkdf argon2id --hash sha3-512 $DISK
+cryptsetup --allow-discards --perf-no_read_workqueue --perf-no_write_workqueue --persistent open $DISK crypt
+
 
 
 

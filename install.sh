@@ -1,7 +1,7 @@
 #!/usr/bin/env -S bash -e
 
-disk
-hostname
+DISK=/dev/sda
+hostnam
 $pass
 
 # Get available mirrors for the US, and then use rankmirrors to sort them

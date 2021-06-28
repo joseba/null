@@ -126,7 +126,6 @@ chmod 600 /mnt/@/.snapshots/1/info.xml
 
 
 
-
 BTRFS="/dev/mapper/crypt
 
 

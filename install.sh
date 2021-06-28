@@ -1,8 +1,9 @@
 #!/usr/bin/env -S bash -e
 
 DISK=/dev/sda
-hostnam
-$pass
+HOSTNAME=null
+USER=jsb
+PASS=$1
 
 # Get available mirrors for the US, and then use rankmirrors to sort them
 echo "Updating mirrorlist..."

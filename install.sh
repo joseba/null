@@ -1,6 +1,8 @@
 #!/usr/bin/env -S bash -e
 
-
+# Get available mirrors for the US, and then use rankmirrors to sort them
+echo "Updating mirrorlist..."
+curl -s "https://www.archlinux.org/mirrorlist/?country=ES&protocol=https&use_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 - > /etc/pacman.d/mirrorlist
 
 # Generate the fstab file
 echo "Generating fstab..."

@@ -46,15 +46,14 @@ CONF
 echo "Generating initramfs"
 mkinitcpio -p linux
 
-# Setup networking
-echo "Installing wifi packages"
-pacman --noconfirm -S 
 # Setup a password for the root account
 echo "Setting root password"
-echo "root:${root_password}" | chpasswd
+echo "root:${PASS}" | chpasswd
+
 # Install a bootloader
 echo "Installing systemd-boot bootloader..."
 bootctl install
+
 # Configure bootloader
 echo "Setting up loader configuration..."
 cat << CONF > /boot/loader/loader.conf
@@ -62,6 +61,7 @@ default arch
 timeout 4
 editor no
 CONF
+
 echo "Setting up Arch LTS bootloader entry..."
 cat << CONF > /boot/loader/entries/arch.conf
 title          Arch Linux LTS

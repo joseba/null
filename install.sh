@@ -90,11 +90,10 @@ BTRFS="/dev/mapper/crypt"
 EFI="${DISK}1"
 mkfs.vfat -F32 -n "EFI"  $EFI
 mkfs.btrfs -L ROOT $BTRFS
-mount $BTRFS /mnt
-
 
 # Creating BTRFS subvolumes.
 echo "Creating BTRFS subvolumes."
+
 btrfs su cr /mnt/@ &>/dev/null
 btrfs su cr /mnt/@home &>/dev/null
 btrfs su cr /mnt/@snapshots &>/dev/null
@@ -105,11 +104,11 @@ umount /mnt
 echo "Mounting the newly created subvolumes."
 btrfs_o=x-mount.mkdir,ssd,noatime,space_cache,compress=zstd
 mount -o $btrfs_o,subvol=@ $BTRFS /mnt
-mkdir -p /mnt/{home,.snapshots,/var/log,boot}
 mount -o $btrfs_o,autodefrag,discard=async,subvol=@home $BTRFS /mnt/home
 mount -o $btrfs_o,autodefrag,discard=async,subvol=@snapshots $BTRFS /mnt/.snapshots
 mount -o $btrfs_o,autodefrag,discard=async,nodatacow,subvol=@var_log $BTRFS /mnt/var/log
 chattr +C /mnt/var/log
+mkdir /mnt/boot
 mount $EFI /mnt/boot/
 exit
 

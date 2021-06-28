@@ -101,9 +101,9 @@ echo "Mounting the newly created subvolumes."
 $btrfs_o=" x-mount.mkdir,ssd,noatime,space_cache,compress=zstd"
 mount -o $btrfs_o,subvol=@ $BTRFS /mnt
 mkdir -p /mnt/{home,.snapshots,/var/log,boot}
-mount -o ssd,noatime,space_cache.compress=zstd,autodefrag,discard=async,subvol=@home $BTRFS /mnt/home
-mount -o ssd,noatime,space_cache,compress=zstd,autodefrag,discard=async,subvol=@snapshots $BTRFS /mnt/.snapshots
-mount -o ssd,noatime,space_cache,compress=zstd,autodefrag,discard=async,nodatacow,subvol=@var_log $BTRFS /mnt/var/log
+mount -o $btrfs_o,autodefrag,discard=async,subvol=@home $BTRFS /mnt/home
+mount -o $btrfs_o,autodefrag,discard=async,subvol=@snapshots $BTRFS /mnt/.snapshots
+mount -o $btrfs_o,autodefrag,discard=async,nodatacow,subvol=@var_log $BTRFS /mnt/var/log
 chattr +C /mnt/var/log
 mount $ESP /mnt/boot/
 

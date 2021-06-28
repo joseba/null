@@ -34,19 +34,21 @@ echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 # Create the hostname file
 echo "Setting hostname..."
 echo $HOSTNAME > /etc/hostname
+
 echo "Setting up hosts file..."
 cat << CONF > /etc/hosts
 127.0.0.1 localhost
 ::1 localhost
-127.0.1.1 $HOSTNAME.JOSE
+127.0.1.1 $HOSTNAME
 CONF
+
 # Create a new initramfs
 echo "Generating initramfs"
 mkinitcpio -p linux
+
 # Setup networking
 echo "Installing wifi packages"
-pacman --noconfirm -S iw wpa_supplicant dialog wpa_actiond
-systemctl enable dhcpcd.service
+pacman --noconfirm -S 
 # Setup a password for the root account
 echo "Setting root password"
 echo "root:${root_password}" | chpasswd

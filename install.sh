@@ -103,7 +103,6 @@ chattr +C /mnt/var/log
 mkdir /mnt/boot
 mount $EFI /mnt/boot/
 
-
 # Pacstrap (setting up a base sytem onto the new root).
 echo "Installing the base system (it may take a while)."
 pacstrap /mnt base base-devel linux $microcode linux-headers linux-firmware iwd btrfs-progs vim \

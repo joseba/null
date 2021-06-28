@@ -79,5 +79,7 @@ cryptsetup luksFormat --perf-no_read_workqueue --perf-no_write_workqueue --type 
 cryptsetup --allow-discards --perf-no_read_workqueue --perf-no_write_workqueue --persistent open $DISK crypt
 
 
+cryptsetup close crypt
+
 
 

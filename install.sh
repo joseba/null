@@ -85,6 +85,48 @@ mkfs.btrfs -L ROOT /dev/mapper/crypt
 
 # Creating BTRFS subvolumes.
 echo "Creating BTRFS subvolumes."
+btrfs subvolume create /mnt/@ &>/dev/null
+btrfs subvolume create /mnt/@/.snapshots &>/dev/null
+mkdir -p /mnt/@/.snapshots/1 &>/dev/null
+btrfs subvolume create /mnt/@/.snapshots/1/snapshot &>/dev/null
+btrfs subvolume create /mnt/@/boot/ &>/dev/null
+btrfs subvolume create /mnt/@/home &>/dev/null
+btrfs subvolume create /mnt/@/root &>/dev/null
+btrfs subvolume create /mnt/@/srv &>/dev/null
+btrfs subvolume create /mnt/@/var_log &>/dev/null
+btrfs subvolume create /mnt/@/var_crash &>/dev/null
+btrfs subvolume create /mnt/@/var_cache &>/dev/null
+btrfs subvolume create /mnt/@/var_tmp &>/dev/null
+btrfs subvolume create /mnt/@/var_spool &>/dev/null
+btrfs subvolume create /mnt/@/var_lib_libvirt_images &>/dev/null
+btrfs subvolume create /mnt/@/cryptkey &>/dev/null
+chattr +C /mnt/@/boot
+chattr +C /mnt/@/srv
+chattr +C /mnt/@/var_log
+chattr +C /mnt/@/var_crash
+chattr +C /mnt/@/var_cache
+chattr +C /mnt/@/var_tmp
+chattr +C /mnt/@/var_spool
+chattr +C /mnt/@/var_lib_libvirt_images
+chattr +C /mnt/@/cryptkey
+btrfs subvolume set-default "$(btrfs subvolume list /mnt | grep "@/.snapshots/1/snapshot" | grep -oP '(?<=ID )[0-9]+')" /mnt
+
+cat << EOF >> /mnt/@/.snapshots/1/info.xml
+<?xml version="1.0"?>
+<snapshot>
+  <type>single</type>
+  <num>1</num>
+  <date>1999-03-31 0:00:00</date>
+  <description>First Root Filesystem</description>
+  <cleanup>number</cleanup>
+</snapshot>
+EOF
+
+chmod 600 /mnt/@/.snapshots/1/info.xml
+
+
+
+
 BTRFS="/dev/mapper/crypt
 
 

@@ -93,7 +93,7 @@ mkfs.btrfs -L ROOT $BTRFS
 
 # Creating BTRFS subvolumes.
 echo "Creating BTRFS subvolumes."
-
+mount $BTRFS /mnt
 btrfs su cr /mnt/@ &>/dev/null
 btrfs su cr /mnt/@home &>/dev/null
 btrfs su cr /mnt/@snapshots &>/dev/null

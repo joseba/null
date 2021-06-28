@@ -73,7 +73,8 @@ echo "Informing the Kernel about the disk changes."
 partprobe "$DISK"
 
 
-# Encript 
+# Encrypt system partition
+echo "Encrypting system partition"
 
 
 

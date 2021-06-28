@@ -52,8 +52,9 @@ read -r -p "This will delete the current partition table on $DISK. Do you agree 
 response=${response,,}
 if [[ "$response" =~ ^(yes|y)$ ]]
 then
-    wipefs -af "$DISK" &>/dev/null
-    echo YES | sgdisk --zap-all "$DISK" &>/dev/null
+    wipefs -af "$DISK" 
+    echo YES | sgdisk --zap-all "$DISK"
+    cryptsetup close crypt
     cryptsetup erase "$DISK" 
     cryptsetup open --type plain -d /dev/urandom "$DISK" wipe
     #dd if=/dev/zero of=/dev/mapper/wipe status=progress bs=1M count=10000

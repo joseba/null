@@ -52,7 +52,10 @@ then
     wipefs -af "$DISK" &>/dev/null
     sgdisk -Zo "$DISK" &>/dev/null
     cryptsetup open --type plain -d /dev/urandom "$DISK" wipe
-    
+    dd if=/dev/zero of=/dev/mapper/wipe status=progress bs=1M count=10000
+    sync
+    cryptsetup close wipe
+    cryptsetup erase 
 else
     echo "Quitting."
     exit

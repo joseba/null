@@ -55,9 +55,12 @@ then
     dd if=/dev/zero of=/dev/mapper/wipe status=progress bs=1M count=10000
     sync
     cryptsetup close wipe
-    cryptsetup erase 
+    cryptsetup erase "$DISK"
 else
     echo "Quitting."
     exit
 fi
+
+
+
 

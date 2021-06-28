@@ -84,9 +84,9 @@ cryptsetup --allow-discards --perf-no_read_workqueue --perf-no_write_workqueue -
 # Formatting the partitions
 echo "Formatting the partitions"
 BTRFS="/dev/mapper/crypt"
-EFI="${DISK}1
-mkfs.vfat -F32 -n "EFI"  ${DISK}1
-mkfs.btrfs -L ROOT /dev/mapper/crypt
+EFI="${DISK}1"
+mkfs.vfat -F32 -n "EFI"  $EFI
+mkfs.btrfs -L ROOT $BTRFS
 
 # Creating BTRFS subvolumes.
 echo "Creating BTRFS subvolumes."
@@ -96,39 +96,7 @@ btrfs su cr /mnt/@snapshots &>/dev/null
 btrfs su cr /mnt/@var_log &>/dev/null
 
 
-# Creating BTRFS subvolumes.
-echo "Creating BTRFS subvolumes."
-BTRFS="/dev/mapper/crypt"
-EFI="${DISK}2"
-mount $BTRFS /mnt
 
-btrfs subvolume create /mnt/@ &>/dev/null
-btrfs subvolume create /mnt/@/.snapshots &>/dev/null
-mkdir -p /mnt/@/.snapshots/1 &>/dev/null
-btrfs subvolume create /mnt/@/.snapshots/1/snapshot &>/dev/null
-btrfs subvolume create /mnt/@/boot/ &>/dev/null
-btrfs subvolume create /mnt/@/home &>/dev/null
-btrfs subvolume create /mnt/@/root &>/dev/null
-btrfs subvolume create /mnt/@/srv &>/dev/null
-btrfs subvolume create /mnt/@/var_log &>/dev/null
-btrfs subvolume create /mnt/@/var_crash &>/dev/null
-btrfs subvolume create /mnt/@/var_cache &>/dev/null
-btrfs subvolume create /mnt/@/var_tmp &>/dev/null
-btrfs subvolume create /mnt/@/var_spool &>/dev/null
-btrfs subvolume create /mnt/@/var_lib_libvirt_images &>/dev/null
-btrfs subvolume create /mnt/@/cryptkey &>/dev/null
-btrfs subvolume set-default "$(btrfs subvolume list /mnt | grep "@/.snapshots/1/snapshot" | grep -oP '(?<=ID )[0-9]+')" /mnt
-cat << 'EOF' >> /mnt/@/.snapshots/1/info.xml
-<?xml version="1.0"?>
-<snapshot>
-  <type>single</type>
-  <num>1</num>
-  <date>1999-03-31 0:00:00</date>
-  <description>First Root Filesystem</description>
-  <cleanup>number</cleanup>
-</snapshot>
-EOF
-chmod 600 /mnt/@/.snapshots/1/info.xml
 
 # Mounting the newly created subvolumes.
 umount /mnt

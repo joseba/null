@@ -143,6 +143,10 @@ chattr +C /mnt/@/var_spool
 chattr +C /mnt/@/var_lib_libvirt_images
 chattr +C /mnt/@/cryptkey
 
+kernel_selector
+
+
+
 cryptsetup close crypt
 
 

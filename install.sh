@@ -86,6 +86,7 @@ mkfs.btrfs -L ROOT /dev/mapper/crypt
 # Creating BTRFS subvolumes.
 echo "Creating BTRFS subvolumes."
 BTRFS="/dev/mapper/crypt"
+EFI="${DISK}
 mount $BTRFS /mnt
 btrfs subvolume create /mnt/@ &>/dev/null
 btrfs subvolume create /mnt/@/.snapshots &>/dev/null
@@ -131,7 +132,7 @@ mount -o x-mount.mkdir,ssd,noatime,space_cache,autodefrag,compress=zstd:15,disca
 mount -o x-mount.mkdir,ssd,noatime,space_cache,autodefrag,compress=zstd:15,discard=async,nodatacow,subvol=@/var_spool $BTRFS /mnt/var/spool
 mount -o x-mount.mkdir,ssd,noatime,space_cache,autodefrag,compress=zstd:15,discard=async,nodatacow,subvol=@/var_lib_libvirt_images $BTRFS /mnt/var/lib/libvirt/images
 mount -o x-mount.mkdir,ssd,noatime,space_cache,autodefrag,compress=zstd:15,discard=async,nodatacow,subvol=@/cryptkey $BTRFS /mnt/cryptkey
-mount -o x-mount.mkdir $ESP /mnt/boot/efi
+mount -o x-mount.mkdir $EFI /mnt/boot/efi
 
 
 

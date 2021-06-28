@@ -64,9 +64,9 @@ CONF
 
 echo "Setting up Arch LTS bootloader entry..."
 cat << CONF > /boot/loader/entries/arch.conf
-title          Arch Linux LTS
-linux          /vmlinuz-linux-lts
-initrd         /initramfs-linux-lts.img
+title          NULL
+linux          /vmlinuz-linux
+initrd         /initramfs-linux.img
 options        root=$(blkid | grep sda2 | cut -f 4 -d ' ' | tr -d '"') rw $additional_kernel_parameters
 CONF
 # Install linux lts kernel

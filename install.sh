@@ -90,6 +90,8 @@ BTRFS="/dev/mapper/crypt"
 EFI="${DISK}1"
 mkfs.vfat -F32 -n "EFI"  $EFI
 mkfs.btrfs -L ROOT $BTRFS
+mount $BTRFS /mnt
+
 
 # Creating BTRFS subvolumes.
 echo "Creating BTRFS subvolumes."

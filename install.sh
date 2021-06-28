@@ -4,7 +4,7 @@
 
 # Generate the fstab file
 echo "Generating fstab..."
-genfstab -U /mnt > /mnt/etc/fstab
+genfstab -L /mnt > /mnt/etc/fstab
 
 
 exit

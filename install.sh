@@ -6,7 +6,6 @@ timedatectl set-ntp true
 # Cleaning the TTY.
 clear
 
-
 # Selecting the kernel flavor to install. 
 kernel_selector () {
     echo "List of kernels:"
@@ -147,11 +146,9 @@ chattr +C /mnt/@/var_spool
 chattr +C /mnt/@/var_lib_libvirt_images
 chattr +C /mnt/@/cryptkey
 
-kernel_selector
-
 # Pacstrap (setting up a base sytem onto the new root).
 echo "Installing the base system (it may take a while)."
-pacstrap /mnt base base-devel ${kernel} ${kernel}-headers linux-firmware iwd btrfs-progs vim \
+pacstrap /mnt base base-devel linux linux-headers linux-firmware iwd btrfs-progs vim \
     tmux htop arch-wiki-docs 
 
 

@@ -57,7 +57,7 @@ then
     cryptsetup close crypt
     cryptsetup erase "$DISK" 
     cryptsetup open --type plain -d /dev/urandom "$DISK" wipe
-    dd if=/dev/zero of=/dev/mapper/wipe status=progress bs=1M count=10000
+    dd if=/dev/zero of=/dev/mapper/wipe status=progress bs=1M count=2000
     sync
     cryptsetup close wipe
     sleep 1

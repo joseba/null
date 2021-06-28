@@ -108,37 +108,11 @@ chattr +C /mnt/var/log
 mount $ESP /mnt/boot/
 
 
-# Mounting the newly created subvolumes.
-umount /mnt
-echo "Mounting the newly created subvolumes."
-mount -o ssd,noatime,space_cache,compress=zstd:15 $BTRFS /mnt
-mount -o x-mount.mkdir,ssd,noatime,space_cache,autodefrag,compress=zstd:15,discard=async,subvol=@/boot $BTRFS /mnt/boot
-mount -o x-mount.mkdir,ssd,noatime,space_cache,autodefrag,compress=zstd:15,discard=async,subvol=@/root $BTRFS /mnt/root 
-mount -o x-mount.mkdir,ssd,noatime,space_cache.autodefrag,compress=zstd:15,discard=async,subvol=@/home $BTRFS /mnt/home
-mount -o x-mount.mkdir,ssd,noatime,space_cache,autodefrag,compress=zstd:15,discard=async,subvol=@/.snapshots $BTRFS /mnt/.snapshots
-mount -o x-mount.mkdir,ssd,noatime,space_cache.autodefrag,compress=zstd:15,discard=async,subvol=@/srv $BTRFS /mnt/srv
-mount -o x-mount.mkdir,ssd,noatime,space_cache,autodefrag,compress=zstd:15,discard=async,nodatacow,subvol=@/var_log $BTRFS /mnt/var/log
-mount -o x-mount.mkdir,ssd,noatime,space_cache,autodefrag,compress=zstd:15,discard=async,nodatacow,subvol=@/var_crash $BTRFS /mnt/var/crash
-mount -o x-mount.mkdir,ssd,noatime,space_cache,autodefrag,compress=zstd:15,discard=async,nodatacow,subvol=@/var_cache $BTRFS /mnt/var/cache
-mount -o x-mount.mkdir,ssd,noatime,space_cache,autodefrag,compress=zstd:15,discard=async,nodatacow,subvol=@/var_tmp $BTRFS /mnt/var/tmp
-mount -o x-mount.mkdir,ssd,noatime,space_cache,autodefrag,compress=zstd:15,discard=async,nodatacow,subvol=@/var_spool $BTRFS /mnt/var/spool
-mount -o x-mount.mkdir,ssd,noatime,space_cache,autodefrag,compress=zstd:15,discard=async,nodatacow,subvol=@/var_lib_libvirt_images $BTRFS /mnt/var/lib/libvirt/images
-mount -o x-mount.mkdir,ssd,noatime,space_cache,autodefrag,compress=zstd:15,discard=async,nodatacow,subvol=@/cryptkey $BTRFS /mnt/cryptkey
-mount -o x-mount.mkdir $EFI /mnt/boot/efi
-chattr +C /mnt/@/boot
-chattr +C /mnt/@/srv
-chattr +C /mnt/@/var_log
-chattr +C /mnt/@/var_crash
-chattr +C /mnt/@/var_cache
-chattr +C /mnt/@/var_tmp
-chattr +C /mnt/@/var_spool
-chattr +C /mnt/@/var_lib_libvirt_images
-chattr +C /mnt/@/cryptkey
 
 # Pacstrap (setting up a base sytem onto the new root).
 echo "Installing the base system (it may take a while)."
 pacstrap /mnt base base-devel linux $microcode linux-headers linux-firmware iwd btrfs-progs vim \
-    tmux htop arch-wiki-docs 
+    tmux htop arch-wiki-docs snapper sudo apparmor reflector
 
 
 #cryptsetup close crypt

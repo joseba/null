@@ -67,7 +67,7 @@ cat << CONF > /boot/loader/entries/arch.conf
 title          NULL
 linux          /vmlinuz-linux
 initrd         /initramfs-linux.img
-options        root=$(blkid | grep sda2 | cut -f 4 -d ' ' | tr -d '"') rw $additional_kernel_parameters
+options        root=$(blkid | grep ${DISK}2 | cut -f 4 -d ' ' | tr -d '"') rw $additional_kernel_parameters
 CONF
 # Install linux lts kernel
 echo "Installing Linux LTS Kernel"

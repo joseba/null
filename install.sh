@@ -1,7 +1,11 @@
 #!/usr/bin/env -S bash -e
 
+# Update the system clock
+timedatectl set-ntp true
+
 # Cleaning the TTY.
 clear
+
 
 # Selecting the kernel flavor to install. 
 kernel_selector () {
@@ -149,6 +153,7 @@ kernel_selector
 echo "Installing the base system (it may take a while)."
 pacstrap /mnt base base-devel ${kernel} ${kernel}-headers linux-firmware iwd btrfs-progs vim \
     tmux htop arch-wiki-docs 
+
 
 #cryptsetup close crypt
 

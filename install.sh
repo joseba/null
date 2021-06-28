@@ -83,14 +83,25 @@ cryptsetup --allow-discards --perf-no_read_workqueue --perf-no_write_workqueue -
 
 # Formatting the partitions
 echo "Formatting the partitions"
+BTRFS="/dev/mapper/crypt"
+EFI="${DISK}1
 mkfs.vfat -F32 -n "EFI"  ${DISK}1
 mkfs.btrfs -L ROOT /dev/mapper/crypt
+
+# Creating BTRFS subvolumes.
+echo "Creating BTRFS subvolumes."
+btrfs su cr /mnt/@ &>/dev/null
+btrfs su cr /mnt/@home &>/dev/null
+btrfs su cr /mnt/@snapshots &>/dev/null
+btrfs su cr /mnt/@var_log &>/dev/null
+
 
 # Creating BTRFS subvolumes.
 echo "Creating BTRFS subvolumes."
 BTRFS="/dev/mapper/crypt"
 EFI="${DISK}2"
 mount $BTRFS /mnt
+
 btrfs subvolume create /mnt/@ &>/dev/null
 btrfs subvolume create /mnt/@/.snapshots &>/dev/null
 mkdir -p /mnt/@/.snapshots/1 &>/dev/null

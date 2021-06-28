@@ -68,4 +68,12 @@ sgdisk --clear \
     --new=2:0:0 --typecode=2:8300 --change-name=2:SYSTEM \
     $DISK
 
+# Informing the Kernel of the changes.
+echo "Informing the Kernel about the disk changes."
+partprobe "$DISK"
+
+
+
+
+
 

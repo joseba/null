@@ -134,10 +134,14 @@ echo "Setting hosts file."
 cat > /mnt/etc/hosts <<EOF
 127.0.0.1   localhost
 ::1         localhost
-127.0.1.1   $HOSTNAME
+127.0.1.1   $HOSTNAME.localdomain $HOSTNAME
 EOF
 
 # Configuring /etc/mkinitcpio.conf.
+mv /mnt/etc/mkinitcpio.conf /mnt/etc/mkinitcpio.conf.orig
+
+
+
 echo "Configuring /etc/mkinitcpio.conf for LUKS hook."
 sed -i -e 's,modconf block filesystems keyboard,keyboard keymap modconf block encrypt filesystems,g' /mnt/etc/mkinitcpio.conf
 

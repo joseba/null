@@ -46,15 +46,14 @@ CONF
 echo "Generating initramfs"
 mkinitcpio -P
 
-
 # Snapper configuration
-  umount /.snapshots
-  rm -r /.snapshots
-  snapper --no-dbus -c root create-config /
-   btrfs subvolume delete /.snapshots &>/dev/null
-    mkdir /.snapshots
-    mount -a
-    chmod 750 /.snapshots
+umount /.snapshots
+rm -r /.snapshots
+snapper --no-dbus -c root create-config /
+btrfs subvolume delete /.snapshots &>/dev/null
+mkdir /.snapshots
+mount -a
+chmod 750 /.snapshots
     
 # Setup a password for the root account
 echo "Setting root password"

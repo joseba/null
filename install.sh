@@ -62,27 +62,25 @@ sgdisk --clear \
 echo "Informing the Kernel about the disk changes."
 partprobe "$DISK"
 
-echo "Encrypting system partition"
+cecho "Encrypting system partition"
 echo $PASS | cryptsetup -q luksFormat --perf-no_read_workqueue --perf-no_write_workqueue --type luks2 --cipher aes-xts-plain64 --key-size 512 --iter-time 2000 --pbkdf argon2id --hash sha3-512 ${DISK}2 -
 echo $PASS | cryptsetup --allow-discards --perf-no_read_workqueue --perf-no_write_workqueue --persistent open ${DISK}2 crypt -
 
-echo "Formatting the partitions"
+cecho "Formatting the partitions"
 BTRFS="/dev/mapper/crypt"
 EFI="${DISK}1"
 mkfs.vfat -F32 -n "EFI"  $EFI
 mkfs.btrfs --force -L ROOT $BTRFS
 
-# Creating BTRFS subvolumes.
-echo "Creating BTRFS subvolumes."
+cecho "Creating BTRFS subvolumes."
 mount $BTRFS /mnt
 btrfs su cr /mnt/@ &>/dev/null
 btrfs su cr /mnt/@home &>/dev/null
 btrfs su cr /mnt/@snapshots &>/dev/null
 btrfs su cr /mnt/@var_log &>/dev/null
 
-# Mounting the newly created subvolumes.
+cecho "Mounting the newly created subvolumes."
 umount /mnt
-echo "Mounting the newly created subvolumes."
 btrfs_o=x-mount.mkdir,ssd,noatime,space_cache,compress=zstd
 mount -o $btrfs_o,subvol=@ $BTRFS /mnt
 mount -o $btrfs_o,autodefrag,discard=async,subvol=@home $BTRFS /mnt/home
@@ -92,8 +90,7 @@ chattr +C /mnt/var/log
 mkdir /mnt/boot
 mount $EFI /mnt/boot/
 
-# Pacstrap (setting up a base sytem onto the new root).
-echo "Installing the base system (it may take a while)."
+cecho "Installing the base system"
 pacstrap /mnt base base-devel linux $microcode linux-headers linux-firmware iwd btrfs-progs vim \
     tmux htop arch-wiki-docs snapper sudo apparmor reflector git pkgfile 
 

@@ -19,15 +19,8 @@ timedatectl set-ntp true
 #curl -s "https://www.archlinux.org/mirrorlist/?country=ES&protocol=https&use_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 - > /etc/pacman.d/mirrorlist
 # todo: esta util no esta en la iso.
 
-PS3="Select the disk where Arch Linux is going to be installed: "
-select ENTRY in $(lsblk -dpnoNAME|grep -P "/dev/sd|nvme|vd");
-do
-    DISK=$ENTRY
-    echo "Installing Arch Linux on $DISK."
-    break
-done
-
-cecho "Deleting old partition scheme."
+cecho "Deleting old partition scheme on $DISK"
+read
 wipefs -af "$DISK" 
 echo YES | sgdisk --zap-all "$DISK"
 cryptsetup close crypt

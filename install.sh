@@ -99,14 +99,14 @@ HOOKS=(base udev autodetect keyboard keymap modconf block encrypt filesystems fs
 EOF
 
 cecho "Setting up loader conf..."
-cat << EOF > /boot/loader/loader.conf
+cat << EOF > /mnt/boot/loader/loader.conf
 default null
 timeout 4
 editor no
 EOF
 
 cecho "Setting up loader entry..."
-cat << EOF > /boot/loader/entries/null.conf
+cat << EOF > /mnt/boot/loader/entries/null.conf
 title          NULL
 linux /vmlinuz-linux
 initrd /intel-ucode.img
@@ -116,22 +116,22 @@ EOF
 
 cecho "Chroot into the system"
 arch-chroot /mnt /bin/bash <<EOF
-    cecho "Setting up the hardware clock..."
+    echo "Setting up the hardware clock..."
     hwclock --systohc
 
-    cecho "Setting locale..."
+    echo "Setting locale..."
     locale-gen
     
-    cecho "Making full system upgrade..."
+    echo "Making full system upgrade..."
     pacman --noconfirm -Syu
 
-    cecho "Generating initramfs"
+    echo "Generating initramfs"
     mkinitcpio -P
     
-    cecho "Installing systemd-boot bootloader..."
+    echo "Installing systemd-boot bootloader..."
     bootctl install
 
-    cecho "Configuring snapper..."
+    echo "Configuring snapper..."
     umount /.snapshots
     rm -r /.snapshots
     snapper --no-dbus -c root create-config /
@@ -140,7 +140,7 @@ arch-chroot /mnt /bin/bash <<EOF
     mount -a
     chmod 750 /.snapshots
     
-    cecho "Setting users..."
+    echo "Setting users..."
     echo "root:${PASS}" | chpasswd
     groupadd -r autologin
     useradd -m -g users -G wheel,autologin -s /bin/zsh $USER

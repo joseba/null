@@ -137,6 +137,10 @@ cat > /mnt/etc/hosts <<EOF
 127.0.1.1   $HOSTNAME.localdomain $HOSTNAME
 EOF
 
+echo "Setting time zone..."
+cp -p /mnt/usr/share/zoneinfo/Europe/Madrid /metc/localtime
+
+
 # Configuring /etc/mkinitcpio.conf.
 mv /mnt/etc/mkinitcpio.conf /mnt/etc/mkinitcpio.conf.orig
 cat > /mnt/etc/mkinitcpio.conf  <<EOF
@@ -146,16 +150,8 @@ FILES=""
 HOOKS="base systemd sd-vconsole modconf keyboard block filesystems btrfs sd-encrypt fsck"
 EOF
 
-
 echo "Configuring /etc/mkinitcpio.conf for LUKS hook."
 sed -i -e 's,modconf block filesystems keyboard,keyboard keymap modconf block encrypt filesystems,g' /mnt/etc/mkinitcpio.conf
-
-
-
-# Setting up LUKS2 encryption and apparmor.
-UUID=$(blkid $BTRFS | cut -f2 -d'"')
-sed -i "s/quiet/quiet cryptdevice=UUID=$UUID:cryptroot root=$BTRFS lsm=lockdown,yama,apparmor,bpf/g" /mnt/etc/default/grub
-
 
 # Chroot into the system
 arch-chroot /mnt /bin/bash <<EOF

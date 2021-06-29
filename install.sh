@@ -102,14 +102,14 @@ FILES=()
 HOOKS=(base udev autodetect keyboard keymap modconf block encrypt filesystems fsck)
 EOF
 
-cecho "Setting up loader configuration..."
+cecho "Setting up loader conf..."
 cat << EOF > /boot/loader/loader.conf
 default null
 timeout 4
 editor no
 EOF
 
-cecho "Setting up bootloader entry..."
+cecho "Setting up loader entry..."
 cat << EOF > /boot/loader/entries/null.conf
 title          NULL
 linux /vmlinuz-linux

@@ -129,6 +129,19 @@ echo "en_US.UTF-8 UTF-8"  > /mnt/etc/locale.gen
 echo "LANG=en_US.UTF-8" > /mnt/etc/locale.conf
 echo "KEYMAP=us" > /mnt/etc/vconsole.conf
 
+# Setting hosts file.
+echo "Setting hosts file."
+cat > /mnt/etc/hosts <<EOF
+127.0.0.1   localhost
+::1         localhost
+127.0.1.1   $HOSTNAME
+EOF
+
+# Configuring /etc/mkinitcpio.conf.
+echo "Configuring /etc/mkinitcpio.conf for LUKS hook."
+sed -i -e 's,modconf block filesystems keyboard,keyboard keymap modconf block encrypt filesystems,g' /mnt/etc/mkinitcpio.conf
+
+
 # Chroot into the system
 arch-chroot /mnt /bin/bash <<EOF
 

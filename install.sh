@@ -136,10 +136,10 @@ arch-chroot /mnt /bin/bash <<EOF
     snapper --no-dbus -c root create-config /
     btrfs subvolume delete /.snapshots &>/dev/null
     mkdir /.snapshots
-   mount -a
+    mount -a
     chmod 750 /.snapshots
     
-    echo "Setting users..."
+    cecho "Setting users..."
     echo "root:${PASS}" | chpasswd
     useradd -m -g users -s /bin/bash jsb
     echo "jsb:${PASS}" | chpasswd
@@ -147,44 +147,6 @@ arch-chroot /mnt /bin/bash <<EOF
 
     echo "Installing systemd-boot bootloader..."
     bootctl install
-
-Tue Jun 29 05:50:24 PM UTC 2021
-[root@archiso entries]# cat 2021-06-29_17-39-26.conf
-# Created by: archinstall
-# Created on: 2021-06-29_17-39-26
-title Arch Linux
-linux /vmlinuz-linux
-initrd /intel-ucode.img
-initrd /initramfs-linux.img
-options cryptdevice=PARTUUID=a3fc8619-1298-4d4a-ac5b-afcf97e07c87:luksdev root=/dev/mapper/luksdev rw intel_pstate=no_hwp
-[root@archiso entries]# blkid
-/dev/sda1: LABEL_FATBOOT="EFI" LABEL="EFI" UUID="DFC9-6CBC" BLOCK_SIZE="512" TYPE="vfat" PARTLABEL="EFI" PARTUUID="d4530ff6-7514-4ae4-a13e-94ff09cd7d6a"
-/dev/sda2: UUID="ea2f078d-a006-4db6-8873-fec918c8b7c9" TYPE="crypto_LUKS" PARTLABEL="primary" PARTUUID="a3fc8619-1298-4d4a-ac5b-afcf97e07c87"
-/dev/mapper/luksloop: UUID="3e1e0739-f1c8-4a3a-bf52-96918d3fbe9b" UUID_SUB="5e1a3bb7-9033-44ff-8219-42ada0db17f3" BLOCK_SIZE="4096" TYPE="btrfs"
-/dev/sdb1: LABEL="ARCH_202106" UUID="1BFA-1052" BLOCK_SIZE="512" TYPE="vfat" PARTUUID="3a616acb-01"
-/dev/loop0: TYPE="squashfs"
-[root@archiso entries]# cat /boot/loader/
-entries/     loader.conf  random-seed
-[root@archiso entries]# cat /boot/loader/loader.conf
-default 2021-06-29_17-39-26
-timeout 4
-editor no
-
-
-    echo "Setting up loader configuration..."
-    cat << CONF > /boot/loader/loader.conf
-default arch
-timeout 4
-editor no
-CONF
-
-    echo "Setting up bootloader entry..."
-    cat << CONF > /boot/loader/entries/arch.conf
-title          NULL
-linux             /vmlinuz-linux
-initrd            /initramfs-linux.img
-options        root=LABEL=ROOT rw rootfstype=btrfs rootflags=subvol=@
-CONF
 
     echo "Making full system upgrade..."
     pacman --noconfirm -Syu

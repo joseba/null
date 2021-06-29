@@ -69,7 +69,8 @@ mount $EFI /mnt/boot/
 
 cecho "Installing the base system"
 pacstrap /mnt base base-devel linux intel-ucode linux-headers linux-firmware iwd btrfs-progs vim \
-    tmux htop arch-wiki-docs snapper sudo apparmor reflector git pkgfile 
+    tmux htop arch-wiki-docs snapper sudo reflector git pkgfile \
+    zsh zsh-autosuggestions zsh-completions zsh-syntax-highlighting
 
 cecho "Generating fstab..."
 genfstab -L /mnt > /mnt/etc/fstab

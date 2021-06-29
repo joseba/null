@@ -102,6 +102,20 @@ FILES=()
 HOOKS=(base udev autodetect keyboard keymap modconf block encrypt filesystems fsck)
 EOF
 
+cecho "Setting up loader configuration..."
+cat << EOF > /boot/loader/loader.conf
+default null
+timeout 4
+editor no
+EOF
+
+cecho "Setting up bootloader entry..."
+cat << CONF > /boot/loader/entries/null.co
+title          NULL
+linux             /vmlinuz-linux
+initrd            /initramfs-linux.img
+options        root=LABEL=ROOT rw rootfstype=btrfs rootflags=subvol=@
+CONF
 
 cecho "Chroot into the system"
 arch-chroot /mnt /bin/bash <<EOF

@@ -46,34 +46,34 @@ CONF
     btrfs subvolume delete /.snapshots &>/dev/null
     mkdir /.snapshots
    mount -a
-chmod 750 /.snapshots
+    chmod 750 /.snapshots
     
-echo "Setting users..."
-echo "root:${PASS}" | chpasswd
-useradd -m -g users -s /bin/bash jsb
-echo "jsb:${PASS}" | chpasswd
-echo jsb ALL=\(ALL\) NOPASSWD: ALL >> /etc/sudoers
+    echo "Setting users..."
+    echo "root:${PASS}" | chpasswd
+    useradd -m -g users -s /bin/bash jsb
+    echo "jsb:${PASS}" | chpasswd
+    echo jsb ALL=\(ALL\) NOPASSWD: ALL >> /etc/sudoers
 
-echo "Installing systemd-boot bootloader..."
-bootctl install
+    echo "Installing systemd-boot bootloader..."
+    bootctl install
 
-echo "Setting up loader configuration..."
-cat << CONF > /boot/loader/loader.conf
+    echo "Setting up loader configuration..."
+    cat << CONF > /boot/loader/loader.conf
 default arch
 timeout 4
 editor no
 CONF
 
-echo "Setting up Arch LTS bootloader entry..."
-cat << CONF > /boot/loader/entries/arch.conf
+    echo "Setting up Arch LTS bootloader entry..."
+    cat << CONF > /boot/loader/entries/arch.conf
 title          NULL
 linux          /vmlinuz-linux
 initrd         /initramfs-linux.img
 options        root=$(blkid | grep ${DISK}2 | cut -f 4 -d ' ' | tr -d '"') rw $additional_kernel_parameters
 CONF
 
-echo "Making full system upgrade..."
-pacman --noconfirm -Syu
+    echo "Making full system upgrade..."
+    pacman --noconfirm -Syu
 
 EOF
 

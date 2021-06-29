@@ -19,16 +19,6 @@ timedatectl set-ntp true
 #curl -s "https://www.archlinux.org/mirrorlist/?country=ES&protocol=https&use_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 - > /etc/pacman.d/mirrorlist
 # todo: esta util no esta en la iso.
 
-
-# Checking the microcode to install.
-CPU=$(grep vendor_id /proc/cpuinfo)
-if [[ $CPU == *"AuthenticAMD"* ]]
-then
-    microcode=amd-ucode
-else
-    microcode=intel-ucode
-fi
-
 PS3="Select the disk where Arch Linux is going to be installed: "
 select ENTRY in $(lsblk -dpnoNAME|grep -P "/dev/sd|nvme|vd");
 do
@@ -85,10 +75,10 @@ mkdir /mnt/boot
 mount $EFI /mnt/boot/
 
 cecho "Installing the base system"
-pacstrap /mnt base base-devel linux i$microcode linux-headers linux-firmware iwd btrfs-progs vim \
+pacstrap /mnt base base-devel linux intel-ucode linux-headers linux-firmware iwd btrfs-progs vim \
     tmux htop arch-wiki-docs snapper sudo apparmor reflector git pkgfile 
 
-echo "Generating fstab..."
+cecho "Generating fstab..."
 genfstab -L /mnt > /mnt/etc/fstab
 
 echo "Setting hostname..."

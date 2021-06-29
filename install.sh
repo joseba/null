@@ -106,14 +106,11 @@ EOF
 cecho "Chroot into the system"
 arch-chroot /mnt /bin/bash <<EOF
 
-    echo "Setting up the hardware clock..."
+    cecho "Setting up the hardware clock..."
     hwclock --systohc
 
-    echo "Setting locale..."
+    cecho "Setting locale..."
     locale-gen
-
-    echo "Setting 
-
 
     echo "Generating initramfs"
     mkinitcpio -P

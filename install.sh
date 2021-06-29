@@ -48,14 +48,12 @@ mkdir /.snapshots
 mount -a
 chmod 750 /.snapshots
     
-# Setup users
-echo "Setting users
+echo "Setting users..."
 echo "root:${PASS}" | chpasswd
 useradd -m -g users -s /bin/bash jsb
 echo "jsb:${PASS}" | chpasswd
 echo jsb ALL=\(ALL\) NOPASSWD: ALL >> /etc/sudoers
 
-# Install a bootloader
 echo "Installing systemd-boot bootloader..."
 bootctl install
 
@@ -77,7 +75,7 @@ CONF
 echo "Making full system upgrade..."
 pacman --noconfirm -Syu
 
-
+EOF
 
 systemctl enable apparmor --root=/mnt
 systemctl enable iwd --root=/mnt

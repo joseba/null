@@ -122,6 +122,9 @@ pacstrap /mnt base base-devel linux $microcode linux-headers linux-firmware iwd 
 echo "Generating fstab..."
 genfstab -L /mnt > /mnt/etc/fstab
 
+echo "Setting hostname..."
+echo "$hostname" > /mnt/etc/hostname
+
 # Chroot into the system
 arch-chroot /mnt /bin/bash <<EOF
 

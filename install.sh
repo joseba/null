@@ -30,7 +30,7 @@ else
     microcode=intel-ucode
 fi
 
-# Selecting the target for the installation.
+# Selecting the targe
 PS3="Select the disk where Arch Linux is going to be installed: "
 select ENTRY in $(lsblk -dpnoNAME|grep -P "/dev/sd|nvme|vd");
 do
@@ -39,7 +39,7 @@ do
     break
 done
 
-# Deleting old partition scheme.
+cecho "Deleting old partition scheme."
 wipefs -af "$DISK" 
 echo YES | sgdisk --zap-all "$DISK"
 cryptsetup close crypt
@@ -51,15 +51,11 @@ cryptsetup close wipe
 sync
 cryptsetup erase "$DISK" 
 
-# Creating a new partition scheme.
-echo "Creating new partition scheme on $DISK."
+cecho "Creating new partition scheme on $DISK."
 sgdisk --clear \
     --new=1:0:+512MiB --typecode=1:ef00 --change-name=1:EFI \
     --new=2:0:0 --typecode=2:8300 --change-name=2:ROOT \
     $DISK
-
-# Informing the Kernel of the changes.
-echo "Informing the Kernel about the disk changes."
 partprobe "$DISK"
 
 cecho "Encrypting system partition"

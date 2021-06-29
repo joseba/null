@@ -139,7 +139,12 @@ EOF
 
 # Configuring /etc/mkinitcpio.conf.
 mv /mnt/etc/mkinitcpio.conf /mnt/etc/mkinitcpio.conf.orig
-
+cat > /mnt/etc/mkinitcpio.conf  <<EOF
+MODULES=""
+BINARIES=""
+FILES=""
+HOOKS="base systemd sd-vconsole modconf keyboard block filesystems btrfs sd-encrypt fsck"
+EOF
 
 
 echo "Configuring /etc/mkinitcpio.conf for LUKS hook."

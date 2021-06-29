@@ -158,7 +158,7 @@ BINARIES=(/usr/bin/btrfs)
 FILES=()
 HOOKS=(base udev autodetect keyboard keymap modconf block encrypt filesystems fsck)
 
-
++
 
 # Chroot into the system
 arch-chroot /mnt /bin/bash <<EOF

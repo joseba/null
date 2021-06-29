@@ -110,18 +110,13 @@ editor no
 EOF
 
 cecho "Setting up bootloader entry..."
-cat << CONF > /boot/loader/entries/null.conf
+cat << EOF > /boot/loader/entries/null.conf
 title          NULL
-
 linux /vmlinuz-linux
 initrd /intel-ucode.img
 initrd /initramfs-linux.img
 options cryptdevice=PARTUUID=a3fc8619-1298-4d4a-ac5b-afcf97e07c87:luksdev root=/dev/mapper/luksdev rw intel_pstate=no_hwp
-
-linux             /vmlinuz-linux
-initrd            /initramfs-linux.img
-options        root=LABEL=ROOT rw rootfstype=btrfs rootflags=subvol=@
-CONF
+EOF
 
 cecho "Chroot into the system"
 arch-chroot /mnt /bin/bash <<EOF

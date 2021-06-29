@@ -5,18 +5,15 @@ HOSTNAME=null
 USER=jsb
 PASS=$1
 
-# Get available mirrors for the US, and then use rankmirrors to sort them
 echo "Updating mirrorlist..."
 curl -s "https://www.archlinux.org/mirrorlist/?country=ES&protocol=https&use_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 - > /etc/pacman.d/mirrorlist
 
-# Generate the fstab file
 echo "Generating fstab..."
 genfstab -L /mnt > /mnt/etc/fstab
 
-
 # Chroot into the system
 arch-chroot /mnt /bin/bash <<EOF
-# Set the time zone
+
 echo "Setting time zone..."
 ln -sf /usr/share/zoneinfo/Europe/Madrid /etc/localtime
 

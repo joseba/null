@@ -139,14 +139,13 @@ arch-chroot /mnt /bin/bash <<EOF
     chmod 750 /.snapshots
     
     cecho "Setting users..."
-    chsh -s /bin/zsh
     echo "root:${PASS}" | chpasswd
     useradd -m -g users -s /bin/bash jsb
     echo "jsb:${PASS}" | chpasswd
     echo jsb ALL=\(ALL\) NOPASSWD: ALL >> /etc/sudoers
 EOF
 
-echo "Enabling services...."
+cecho "Enabling services...."
 #systemctl enable apparmor --root=/mnt #todo
 systemctl enable iwd --root=/mnt
 systemctl enable snapper-timeline.timer --root=/mnt 

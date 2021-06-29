@@ -79,8 +79,10 @@ pacman --noconfirm -Syu
 
 
 
-
-systemctl enable iwd --root=/mnt &>/dev/null
+systemctl enable apparmor --root=/mnt
+systemctl enable iwd --root=/mnt
+systemctl enable snapper-timeline.timer --root=/mnt 
+systemctl enable snapper-cleanup.timer --root=/mnt 
 
 
 exit

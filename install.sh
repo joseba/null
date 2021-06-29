@@ -39,8 +39,7 @@ CONF
 echo "Generating initramfs"
 mkinitcpio -P
 
-# Snapper configuration
-echo "Configuring..
+echo "Configuring snapper..."
 umount /.snapshots
 rm -r /.snapshots
 snapper --no-dbus -c root create-config /

@@ -12,14 +12,15 @@ cecho() {
   echo -e "$RED $@ $NC"
 }
 
+clear
+
 #cecho "Updating mirrorlist..."
 #curl -s "https://www.archlinux.org/mirrorlist/?country=ES&protocol=https&use_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 - > /etc/pacman.d/mirrorlist
+# todo: este paqu
 
 # Update the system clock
 timedatectl set-ntp true
 
-# Cleaning the TTY.
-clear
 
 # Checking the microcode to install.
 CPU=$(grep vendor_id /proc/cpuinfo)
@@ -30,7 +31,6 @@ else
     microcode=intel-ucode
 fi
 
-# Selecting the targe
 PS3="Select the disk where Arch Linux is going to be installed: "
 select ENTRY in $(lsblk -dpnoNAME|grep -P "/dev/sd|nvme|vd");
 do

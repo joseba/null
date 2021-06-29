@@ -147,6 +147,9 @@ arch-chroot /mnt /bin/bash <<EOF
 127.0.1.1 $HOSTNAME
 CONF
 
+
+
+
     echo "Generating initramfs"
     mkinitcpio -P
 

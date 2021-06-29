@@ -59,7 +59,6 @@ echo jsb ALL=\(ALL\) NOPASSWD: ALL >> /etc/sudoers
 echo "Installing systemd-boot bootloader..."
 bootctl install
 
-# Configure bootloader
 echo "Setting up loader configuration..."
 cat << CONF > /boot/loader/loader.conf
 default arch
@@ -75,8 +74,10 @@ initrd         /initramfs-linux.img
 options        root=$(blkid | grep ${DISK}2 | cut -f 4 -d ' ' | tr -d '"') rw $additional_kernel_parameters
 CONF
 
-# Do a full system upgrade
+echo "Making full system upgrade..."
 pacman --noconfirm -Syu
+
+
 
 
 systemctl enable iwd --root=/mnt &>/dev/null

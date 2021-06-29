@@ -16,8 +16,8 @@ clear
 timedatectl set-ntp true
 
 #cecho "Updating mirrorlist..."
-#curl -s "https://www.archlinux.org/mirrorlist/?country=ES&protocol=https&use_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 - > /etc/pacman.d/mirrorlist
-# todo: esta util no esta en la iso.
+pacman -Sy pacman-contrib
+curl -s "https://www.archlinux.org/mirrorlist/?country=ES&protocol=https&use_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 - > /etc/pacman.d/mirrorlist
 
 cecho "Deleting old partition scheme on $DISK"
 read

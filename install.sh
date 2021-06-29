@@ -88,7 +88,7 @@ echo $PASS | cryptsetup --allow-discards --perf-no_read_workqueue --perf-no_writ
 
 # Formatting the partitions
 echo "Formatting the partitions"
-BTRFS="/dev/mapper/crypt"
+="/dev/mapper/crypt"
 EFI="${DISK}1"
 mkfs.vfat -F32 -n "EFI"  $EFI
 mkfs.btrfs --force -L ROOT $BTRFS
@@ -205,12 +205,12 @@ timeout 4
 editor no
 CONF
 
-    echo "Setting up Arch LTS bootloader entry..."
+    echo "Setting up bootloader entry..."
     cat << CONF > /boot/loader/entries/arch.conf
 title          NULL
 linux          /vmlinuz-linux
 initrd         /initramfs-linux.img
-options        root=$(blkid | grep ${DISK}2 | cut -f 4 -d ' ' | tr -d '"') rw $additional_kernel_parameters
+options        root=$(blkid | grep $BTRFS | cut -f 4 -d ' ' | tr -d '"') rw $additional_kernel_parameters
 CONF
 
     echo "Making full system upgrade..."

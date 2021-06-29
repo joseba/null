@@ -139,6 +139,7 @@ arch-chroot /mnt /bin/bash <<EOF
     chmod 750 /.snapshots
     
     cecho "Setting users..."
+    chsh -s /bin/zsh
     echo "root:${PASS}" | chpasswd
     useradd -m -g users -s /bin/bash jsb
     echo "jsb:${PASS}" | chpasswd

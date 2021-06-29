@@ -15,10 +15,10 @@ cecho() {
 clear
 timedatectl set-ntp true
 
-cecho "Updating mirrorlist..."
-pacman -Sy pacman-contrib
-cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.orig
-curl -s "https://www.archlinux.org/mirrorlist/?country=ES&protocol=https&use_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 - > /etc/pacman.d/mirrorlist
+#cecho "Updating mirrorlist..."
+#pacman -Sy pacman-contrib
+#cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.orig
+#curl -s "https://www.archlinux.org/mirrorlist/?country=ES&protocol=https&use_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 - > /etc/pacman.d/mirrorlist
 #todo meter en tmp
 
 cecho "Deleting old partition scheme on $DISK"

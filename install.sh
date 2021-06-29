@@ -17,6 +17,7 @@ timedatectl set-ntp true
 
 cecho "Updating mirrorlist..."
 pacman -Sy pacman-contrib
+cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.orig
 curl -s "https://www.archlinux.org/mirrorlist/?country=ES&protocol=https&use_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 - > /etc/pacman.d/mirrorlist
 #todo meter en tmp
 
@@ -86,6 +87,7 @@ cat > /mnt/etc/hosts <<EOF
 127.0.1.1   $HOSTNAME.localdomain $HOSTNAME
 EOF
 cp -p /mnt/usr/share/zoneinfo/Europe/Madrid /mnt/etc/localtime
+cp -p /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist
 
 cecho "Configuring /etc/mkinitcpio.conf."
 mv /mnt/etc/mkinitcpio.conf /mnt/etc/mkinitcpio.conf.orig

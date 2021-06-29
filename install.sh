@@ -125,8 +125,10 @@ genfstab -L /mnt > /mnt/etc/fstab
 echo "Setting hostname..."
 echo "$HOSTNAME" > /mnt/etc/hostname
 
+echo "Setting up locales..."
 echo "en_US.UTF-8 UTF-8"  > /mnt/etc/locale.gen
-echo "LANG=$locale.UTF-8" > /mnt/etc/locale.conf
+echo "LANG=en_US.UTF-8" > /mnt/etc/locale.conf
+
 
 # Chroot into the system
 arch-chroot /mnt /bin/bash <<EOF

@@ -118,7 +118,6 @@ echo "Installing the base system (it may take a while)."
 pacstrap /mnt base base-devel linux $microcode linux-headers linux-firmware iwd btrfs-progs vim \
     tmux htop arch-wiki-docs snapper sudo apparmor reflector git pkgfile 
 
-
 echo "Generating fstab..."
 genfstab -L /mnt > /mnt/etc/fstab
 
@@ -128,7 +127,7 @@ echo "$HOSTNAME" > /mnt/etc/hostname
 echo "Setting up locales..."
 echo "en_US.UTF-8 UTF-8"  > /mnt/etc/locale.gen
 echo "LANG=en_US.UTF-8" > /mnt/etc/locale.conf
-
+echo "KEYMAP=us" > /mnt/etc/vconsole.conf
 
 # Chroot into the system
 arch-chroot /mnt /bin/bash <<EOF

@@ -8,6 +8,11 @@ PASS=$1
 RED='\033[0;31m'
 NC='\033[0m' 
 
+cecho() {
+  echo 
+}
+
+
 echo "Updating mirrorlist..."
 curl -s "https://www.archlinux.org/mirrorlist/?country=ES&protocol=https&use_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 - > /etc/pacman.d/mirrorlist
 

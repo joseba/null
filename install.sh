@@ -140,7 +140,8 @@ arch-chroot /mnt /bin/bash <<EOF
     
     cecho "Setting users..."
     echo "root:${PASS}" | chpasswd
-    useradd -m -g users -s /bin/zsh $USER
+    groupadd -r autologin
+    useradd -m -g users -G wheel,autologin -s /bin/zsh $USER
     echo "${USER}:${PASS}" | chpasswd
     echo $USER ALL=\(ALL\) NOPASSWD: ALL >> /etc/sudoers
 EOF

@@ -138,8 +138,7 @@ cat > /mnt/etc/hosts <<EOF
 EOF
 
 echo "Setting time zone..."
-cp -p /mnt/usr/share/zoneinfo/Europe/Madrid /metc/localtime
-
+cp -p /mnt/usr/share/zoneinfo/Europe/Madrid /mnt/etc/localtime
 
 # Configuring /etc/mkinitcpio.conf.
 mv /mnt/etc/mkinitcpio.conf /mnt/etc/mkinitcpio.conf.orig
@@ -163,10 +162,7 @@ arch-chroot /mnt /bin/bash <<EOF
     hwclock --systohc
 
     echo "Setting locale..."
-    echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
     locale-gen
-    export LANG=en_US.UTF-8 
-    echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 
     echo "Setting hostname..."
     echo $HOSTNAME > /etc/hostname

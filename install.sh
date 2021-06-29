@@ -209,7 +209,8 @@ CONF
     cat << CONF > /boot/loader/entries/arch.conf
 title          NULL
 linux          /vmlinuz-linux
-initrd         /initramfs-linux.img
+initrd            /initramfs-linux.img
+options        root=LABEL=ROOT rw rootfstype=btrfs rootflags=subvol=@
 options        root=$(blkid | grep $BTRFS | cut -f 4 -d ' ' | tr -d '"') rw $additional_kernel_parameters
 CONF
 

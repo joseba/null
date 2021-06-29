@@ -152,6 +152,12 @@ EOF
 echo "Configuring /etc/mkinitcpio.conf for LUKS hook."
 sed -i -e 's,modconf block filesystems keyboard,keyboard keymap modconf block encrypt filesystems,g' /mnt/etc/mkinitcpio.conf
 
+[root@archiso entries]# cat /etc/mkinitcpio.conf
+MODULES=(btrfs)
+BINARIES=(/usr/bin/btrfs)
+FILES=()
+HOOKS=(base udev autodetect keyboard keymap modconf block encrypt filesystems fsck)
+
 
 
 # Chroot into the system

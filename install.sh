@@ -126,6 +126,8 @@ arch-chroot /mnt /bin/bash <<EOF
 
     cecho "Setting locale..."
     locale-gen
+    
+    
 
     cecho "Generating initramfs"
     mkinitcpio -P

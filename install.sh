@@ -103,11 +103,8 @@ HOOKS=(base udev autodetect keyboard keymap modconf block encrypt filesystems fs
 EOF
 
 
-# Chroot into the system
+cecho "Chroot into the system"
 arch-chroot /mnt /bin/bash <<EOF
-
-    echo "Setting time zone..."
-    ln -sf /usr/share/zoneinfo/Europe/Madrid /etc/localtime
 
     echo "Setting up the hardware clock..."
     hwclock --systohc
@@ -115,17 +112,7 @@ arch-chroot /mnt /bin/bash <<EOF
     echo "Setting locale..."
     locale-gen
 
-    echo "Setting hostname..."
-    echo $HOSTNAME > /etc/hostname
-
-    echo "Setting up hosts file..."
-    cat << CONF > /etc/hosts
-127.0.0.1 localhost
-::1 localhost
-127.0.1.1 $HOSTNAME
-CONF
-
-
+    echo "Setting 
 
 
     echo "Generating initramfs"

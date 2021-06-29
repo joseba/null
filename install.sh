@@ -154,7 +154,7 @@ arch-chroot /mnt /bin/bash <<EOF
 EOF
 
 echo "Enabling services...."
-systemctl enable apparmor --root=/mnt
+#systemctl enable apparmor --root=/mnt
 systemctl enable iwd --root=/mnt
 systemctl enable snapper-timeline.timer --root=/mnt 
 systemctl enable snapper-cleanup.timer --root=/mnt 

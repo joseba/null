@@ -109,7 +109,7 @@ title          NULL
 linux /vmlinuz-linux
 initrd /intel-ucode.img
 initrd /initramfs-linux.img
-options cryptdevice=PARTLABEL=ROOT:luksdev root=/dev/mapper/ROOT rw intel_pstate=no_hwp rd.luks.options=discard mem_sleep_default=deep
+options cryptdevice=PARTLABEL=ROOT:luksdev root=/dev/mapper/ROOT rootflags=subvol=@ rw intel_pstate=no_hwp rd.luks.options=discard mem_sleep_default=deep
 EOF
 
 cecho "Chroot into the system"

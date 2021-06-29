@@ -157,6 +157,10 @@ systemctl enable snapper-cleanup.timer --root=/mnt
 echo "Misc...."
 cp -Rp  /var/lib/iwd /mnt/var/lib/
 
+umount -R /mnt
+
+
+
 
 
 

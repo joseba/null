@@ -85,7 +85,7 @@ systemctl enable snapper-cleanup.timer --root=/mnt
 
 
 echo "Misc...."
-cp -
+cp -Rp  /var/lib/iwd /mnt/var/lib/
 
 exit
 

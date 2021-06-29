@@ -152,6 +152,8 @@ EOF
 echo "Configuring /etc/mkinitcpio.conf for LUKS hook."
 sed -i -e 's,modconf block filesystems keyboard,keyboard keymap modconf block encrypt filesystems,g' /mnt/etc/mkinitcpio.conf
 
+
+
 # Chroot into the system
 arch-chroot /mnt /bin/bash <<EOF
 

@@ -112,10 +112,10 @@ arch-chroot /mnt /bin/bash <<EOF
     cecho "Setting locale..."
     locale-gen
 
-    echo "Generating initramfs"
+    cecho "Generating initramfs"
     mkinitcpio -P
 
-    echo "Configuring snapper..."
+    cecho "Configuring snapper..."
     umount /.snapshots
     rm -r /.snapshots
     snapper --no-dbus -c root create-config /

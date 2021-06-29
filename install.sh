@@ -141,8 +141,10 @@ EOF
 echo "Configuring /etc/mkinitcpio.conf for LUKS hook."
 sed -i -e 's,modconf block filesystems keyboard,keyboard keymap modconf block encrypt filesystems,g' /mnt/etc/mkinitcpio.conf
 
+
+
 # Setting up LUKS2 encryption and apparmor.
-UUID=$(blkid $Cryptroot | cut -f2 -d'"')
+UUID=$(blkid $BTRFS | cut -f2 -d'"')
 sed -i "s/quiet/quiet cryptdevice=UUID=$UUID:cryptroot root=$BTRFS lsm=lockdown,yama,apparmor,bpf/g" /mnt/etc/default/grub
 
 

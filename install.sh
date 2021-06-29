@@ -158,9 +158,8 @@ echo "Misc...."
 cp -Rp  /var/lib/iwd /mnt/var/lib/
 
 umount -R /mnt
-
-
-
+cryptsetup close wipe
+reboot
 
 
 

@@ -99,14 +99,14 @@ HOOKS=(base udev autodetect keyboard keymap modconf block encrypt filesystems fs
 EOF
 
 cecho "Setting up loader conf..."
-cat << EOF > /mnt/boot/loader/loader.conf
+cat > /mnt/boot/loader/loader.conf <<EOF
 default null
 timeout 4
 editor no
 EOF
 
 cecho "Setting up loader entry..."
-cat << EOF > /mnt/boot/loader/entries/null.conf
+cat > /mnt/boot/loader/entries/null.conf <<EOF
 title          NULL
 linux /vmlinuz-linux
 initrd /intel-ucode.img

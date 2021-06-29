@@ -77,10 +77,15 @@ pacman --noconfirm -Syu
 
 EOF
 
+echo "Enabling services...."
 systemctl enable apparmor --root=/mnt
 systemctl enable iwd --root=/mnt
 systemctl enable snapper-timeline.timer --root=/mnt 
 systemctl enable snapper-cleanup.timer --root=/mnt 
+
+
+echo "Misc...."
+cp -
 
 exit
 

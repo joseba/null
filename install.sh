@@ -81,26 +81,19 @@ pacstrap /mnt base base-devel linux intel-ucode linux-headers linux-firmware iwd
 cecho "Generating fstab..."
 genfstab -L /mnt > /mnt/etc/fstab
 
-echo "Setting hostname..."
+cecho "Setting common..."
 echo "$HOSTNAME" > /mnt/etc/hostname
-
-echo "Setting up locales..."
 echo "en_US.UTF-8 UTF-8"  > /mnt/etc/locale.gen
 echo "LANG=en_US.UTF-8" > /mnt/etc/locale.conf
 echo "KEYMAP=us" > /mnt/etc/vconsole.conf
-
-# Setting hosts file.
-echo "Setting hosts file."
 cat > /mnt/etc/hosts <<EOF
 127.0.0.1   localhost
 ::1         localhost
 127.0.1.1   $HOSTNAME.localdomain $HOSTNAME
 EOF
-
-echo "Setting time zone..."
 cp -p /mnt/usr/share/zoneinfo/Europe/Madrid /mnt/etc/localtime
 
-# Configuring /etc/mkinitcpio.conf.
+cecho "Configuring /etc/mkinitcpio.conf."
 mv /mnt/etc/mkinitcpio.conf /mnt/etc/mkinitcpio.conf.orig
 cat > /mnt/etc/mkinitcpio.conf  <<EOF
 MODULES=(btrfs)

@@ -58,10 +58,9 @@ chmod 750 /.snapshots
 # Setup users
 echo "Setting users
 echo "root:${PASS}" | chpasswd
-useradd -m -g users -s /bin/bash $user_name
-echo "${user_name}:${user_password}" | chpasswd
-# Make the non-root user a sudoer
-echo odin ALL=\(ALL\) NOPASSWD: ALL >> /etc/sudoers
+useradd -m -g users -s /bin/bash jsb
+echo "jsb:${PASS}" | chpasswd
+echo jsb ALL=\(ALL\) NOPASSWD: ALL >> /etc/sudoers
 
 # Install a bootloader
 echo "Installing systemd-boot bootloader..."

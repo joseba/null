@@ -115,7 +115,7 @@ title          NULL
 linux /vmlinuz-linux
 initrd /intel-ucode.img
 initrd /initramfs-linux.img
-options cryptdevice=PARTUUID=a3fc8619-1298-4d4a-ac5b-afcf97e07c87:luksdev root=/dev/mapper/luksdev rw intel_pstate=no_hwp
+options cryptdevice=PARTLABEL=ROOT:luksdev root=/dev/mapper/luksdev rw intel_pstate=no_hwp
 EOF
 
 cecho "Chroot into the system"
@@ -150,8 +150,6 @@ arch-chroot /mnt /bin/bash <<EOF
     useradd -m -g users -s /bin/bash jsb
     echo "jsb:${PASS}" | chpasswd
     echo jsb ALL=\(ALL\) NOPASSWD: ALL >> /etc/sudoers
-
-    ech
 
 EOF
 

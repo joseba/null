@@ -127,10 +127,14 @@ arch-chroot /mnt /bin/bash <<EOF
     cecho "Setting locale..."
     locale-gen
     
-    
+    cecho "Making full system upgrade..."
+    pacman --noconfirm -Syu
 
     cecho "Generating initramfs"
     mkinitcpio -P
+    
+    cecho "Installing systemd-boot bootloader..."
+    bootctl install
 
     cecho "Configuring snapper..."
     umount /.snapshots
@@ -147,11 +151,7 @@ arch-chroot /mnt /bin/bash <<EOF
     echo "jsb:${PASS}" | chpasswd
     echo jsb ALL=\(ALL\) NOPASSWD: ALL >> /etc/sudoers
 
-    echo "Installing systemd-boot bootloader..."
-    bootctl install
-
-    echo "Making full system upgrade..."
-    pacman --noconfirm -Syu
+    ech
 
 EOF
 

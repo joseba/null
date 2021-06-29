@@ -88,7 +88,7 @@ echo $PASS | cryptsetup --allow-discards --perf-no_read_workqueue --perf-no_writ
 
 # Formatting the partitions
 echo "Formatting the partitions"
-="/dev/mapper/crypt"
+BTRFS="/dev/mapper/crypt"
 EFI="${DISK}1"
 mkfs.vfat -F32 -n "EFI"  $EFI
 mkfs.btrfs --force -L ROOT $BTRFS

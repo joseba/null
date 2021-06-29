@@ -14,38 +14,38 @@ genfstab -L /mnt > /mnt/etc/fstab
 # Chroot into the system
 arch-chroot /mnt /bin/bash <<EOF
 
-echo "Setting time zone..."
-ln -sf /usr/share/zoneinfo/Europe/Madrid /etc/localtime
+    echo "Setting time zone..."
+    ln -sf /usr/share/zoneinfo/Europe/Madrid /etc/localtime
 
-echo "Setting up the hardware clock..."
-hwclock --systohc
+    echo "Setting up the hardware clock..."
+    hwclock --systohc
 
-echo "Setting locale..."
-echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
-locale-gen
-export LANG=en_US.UTF-8 
-echo "LANG=en_US.UTF-8" >> /etc/locale.conf
+    echo "Setting locale..."
+    echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
+    locale-gen
+    export LANG=en_US.UTF-8 
+    echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 
-echo "Setting hostname..."
-echo $HOSTNAME > /etc/hostname
+    echo "Setting hostname..."
+    echo $HOSTNAME > /etc/hostname
 
-echo "Setting up hosts file..."
-cat << CONF > /etc/hosts
+    echo "Setting up hosts file..."
+    cat << CONF > /etc/hosts
 127.0.0.1 localhost
 ::1 localhost
 127.0.1.1 $HOSTNAME
 CONF
 
-echo "Generating initramfs"
-mkinitcpio -P
+    echo "Generating initramfs"
+    mkinitcpio -P
 
-echo "Configuring snapper..."
-umount /.snapshots
-rm -r /.snapshots
-snapper --no-dbus -c root create-config /
-btrfs subvolume delete /.snapshots &>/dev/null
-mkdir /.snapshots
-mount -a
+    echo "Configuring snapper..."
+    umount /.snapshots
+    rm -r /.snapshots
+    snapper --no-dbus -c root create-config /
+    btrfs subvolume delete /.snapshots &>/dev/null
+    mkdir /.snapshots
+   mount -a
 chmod 750 /.snapshots
     
 echo "Setting users..."

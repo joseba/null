@@ -55,9 +55,13 @@ mkdir /.snapshots
 mount -a
 chmod 750 /.snapshots
     
-# Setup a password for the root account
-echo "Setting root password"
+# Setup users
+echo "Setting users
 echo "root:${PASS}" | chpasswd
+useradd -m -g users -s /bin/bash $user_name
+echo "${user_name}:${user_password}" | chpasswd
+# Make the non-root user a sudoer
+echo odin ALL=\(ALL\) NOPASSWD: ALL >> /etc/sudoers
 
 # Install a bootloader
 echo "Installing systemd-boot bootloader..."
@@ -78,9 +82,7 @@ linux          /vmlinuz-linux
 initrd         /initramfs-linux.img
 options        root=$(blkid | grep ${DISK}2 | cut -f 4 -d ' ' | tr -d '"') rw $additional_kernel_parameters
 CONF
-# Install linux lts kernel
-echo "Installing Linux LTS Kernel"
-pacman --noconfirm -S linux-lts linux-lts-headers
+
 # Add a non-root user
 useradd -m -g users -s /bin/bash $user_name
 echo "${user_name}:${user_password}" | chpasswd

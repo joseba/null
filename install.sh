@@ -140,9 +140,9 @@ arch-chroot /mnt /bin/bash <<EOF
     
     cecho "Setting users..."
     echo "root:${PASS}" | chpasswd
-    useradd -m -g users -s /bin/bash jsb
-    echo "jsb:${PASS}" | chpasswd
-    echo jsb ALL=\(ALL\) NOPASSWD: ALL >> /etc/sudoers
+    useradd -m -g users -s /bin/bash $
+    echo "${USER}:${PASS}" | chpasswd
+    echo $USER ALL=\(ALL\) NOPASSWD: ALL >> /etc/sudoers
 EOF
 
 cecho "Enabling services...."

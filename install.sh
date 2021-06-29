@@ -17,18 +17,15 @@ arch-chroot /mnt /bin/bash <<EOF
 echo "Setting time zone..."
 ln -sf /usr/share/zoneinfo/Europe/Madrid /etc/localtime
 
-# Setup the hardware clock
 echo "Setting up the hardware clock..."
 hwclock --systohc
 
-# Setup locale
 echo "Setting locale..."
 echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
 locale-gen
 export LANG=en_US.UTF-8 
 echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 
-# Create the hostname file
 echo "Setting hostname..."
 echo $HOSTNAME > /etc/hostname
 
@@ -39,11 +36,11 @@ cat << CONF > /etc/hosts
 127.0.1.1 $HOSTNAME
 CONF
 
-# Create a new initramfs
 echo "Generating initramfs"
 mkinitcpio -P
 
 # Snapper configuration
+echo "Configuring..
 umount /.snapshots
 rm -r /.snapshots
 snapper --no-dbus -c root create-config /

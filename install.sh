@@ -143,22 +143,12 @@ cp -p /mnt/usr/share/zoneinfo/Europe/Madrid /mnt/etc/localtime
 # Configuring /etc/mkinitcpio.conf.
 mv /mnt/etc/mkinitcpio.conf /mnt/etc/mkinitcpio.conf.orig
 cat > /mnt/etc/mkinitcpio.conf  <<EOF
-MODULES=""
-BINARIES=""
-FILES=""
-HOOKS="base systemd sd-vconsole modconf keyboard block filesystems btrfs sd-encrypt fsck"
-EOF
-
-echo "Configuring /etc/mkinitcpio.conf for LUKS hook."
-sed -i -e 's,modconf block filesystems keyboard,keyboard keymap modconf block encrypt filesystems,g' /mnt/etc/mkinitcpio.conf
-
-[root@archiso entries]# cat /etc/mkinitcpio.conf
 MODULES=(btrfs)
 BINARIES=(/usr/bin/btrfs)
 FILES=()
 HOOKS=(base udev autodetect keyboard keymap modconf block encrypt filesystems fsck)
+EOF
 
-+
 
 # Chroot into the system
 arch-chroot /mnt /bin/bash <<EOF

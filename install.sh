@@ -82,11 +82,6 @@ initrd         /initramfs-linux.img
 options        root=$(blkid | grep ${DISK}2 | cut -f 4 -d ' ' | tr -d '"') rw $additional_kernel_parameters
 CONF
 
-# Add a non-root user
-useradd -m -g users -s /bin/bash $user_name
-echo "${user_name}:${user_password}" | chpasswd
-# Make the non-root user a sudoer
-echo odin ALL=\(ALL\) NOPASSWD: ALL >> /etc/sudoers
 # Do a full system upgrade
 pacman --noconfirm -Syu
 

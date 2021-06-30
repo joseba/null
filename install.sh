@@ -113,6 +113,7 @@ initrd /intel-ucode.img
 initrd /initramfs-linux.img
 options cryptdevice=PARTLABEL=ROOT:luksdev root=/dev/mapper/ROOT rootflags=subvol=@ rw intel_pstate=no_hwp rd.luks.options=discard mem_sleep_default=deep
 EOF
+sync
 
 cecho "Chroot into the system"
 arch-chroot /mnt /bin/bash <<EOF

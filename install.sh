@@ -155,6 +155,8 @@ systemctl enable iwd --root=/mnt
 systemctl enable snapper-timeline.timer --root=/mnt 
 systemctl enable snapper-cleanup.timer --root=/mnt 
 
+exit
+
 cecho "Misc...."
 cp -Rp  /var/lib/iwd /mnt/var/lib/
 sync

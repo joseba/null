@@ -73,7 +73,7 @@ pacstrap /mnt base base-devel linux intel-ucode linux-headers linux-firmware btr
     dhcpcd iwd openssh \
     alsa-utils \
     man-db man-pages arch-wiki-docs \
-    vim tmux htop snapper sudo reflector git pkgfile \
+    cronie vim tmux htop snapper sudo reflector git pkgfile \
     zsh zsh-autosuggestions zsh-completions zsh-syntax-highlighting
 
 cecho "Generating fstab..."
@@ -158,6 +158,7 @@ systemctl enable snapper-timeline.timer --root=/mnt
 systemctl enable snapper-cleanup.timer --root=/mnt 
 systemctl enable dhcpcd --root=/mnt
 systemctl enable sshd --root=/mnt
+systemctl enable cronie --root=/mnt
 
 cecho "Misc...."
 cp -Rp  /var/lib/iwd /mnt/var/lib/

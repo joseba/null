@@ -71,6 +71,7 @@ mount $EFI /mnt/boot/
 cecho "Installing the base system"
 pacstrap /mnt base base-devel linux intel-ucode linux-headers linux-firmware btrfs-progs \
     dhcpcd iwd openssh \
+    alsa-utils \
     man-db man-pages arch-wiki-docs \
     vim tmux htop snapper sudo reflector git pkgfile \
     zsh zsh-autosuggestions zsh-completions zsh-syntax-highlighting

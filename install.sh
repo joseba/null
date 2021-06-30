@@ -98,23 +98,6 @@ FILES=()
 HOOKS=(base udev autodetect keyboard keymap modconf block encrypt filesystems fsck)
 EOF
 
-cecho "Setting up loader conf..."
-cat > /mnt/boot/loader/loader.conf <<EOF
-default null
-timeout 4
-editor no
-EOF
-
-cecho "Setting up loader entry..."
-cat > /mnt/boot/loader/entries/null.conf <<EOF
-title          NULL
-linux /vmlinuz-linux
-initrd /intel-ucode.img
-initrd /initramfs-linux.img
-options cryptdevice=PARTLABEL=ROOT:ROOT root=/dev/mapper/ROOT rootflags=subvol=@ rw intel_pstate=no_hwp rd.luks.options=discard mem_sleep_default=deep
-EOF
-sync
-
 cecho "Chroot into the system"
 arch-chroot /mnt /bin/bash <<EOF
     echo "Setting up the hardware clock..."
@@ -149,13 +132,27 @@ arch-chroot /mnt /bin/bash <<EOF
     echo $USER ALL=\(ALL\) NOPASSWD: ALL >> /etc/sudoers
 EOF
 
+cecho "Setting up loader conf..."
+cat > /mnt/boot/loader/loader.conf <<EOF
+default null
+timeout 4
+editor no
+EOF
+
+cecho "Setting up loader entry..."
+cat > /mnt/boot/loader/entries/null.conf <<EOF
+title          NULL
+linux /vmlinuz-linux
+initrd /intel-ucode.img
+initrd /initramfs-linux.img
+options cryptdevice=PARTLABEL=ROOT:ROOT root=/dev/mapper/ROOT rootflags=subvol=@ rw intel_pstate=no_hwp rd.luks.options=discard mem_sleep_default=deep
+EOF
+
 cecho "Enabling services...."
 #systemctl enable apparmor --root=/mnt #todo
 systemctl enable iwd --root=/mnt
 systemctl enable snapper-timeline.timer --root=/mnt 
 systemctl enable snapper-cleanup.timer --root=/mnt 
-
-exit
 
 cecho "Misc...."
 cp -Rp  /var/lib/iwd /mnt/var/lib/

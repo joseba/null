@@ -65,7 +65,7 @@ mount -o $btrfs_o,autodefrag,discard=async,subvol=@home $BTRFS /mnt/home
 mount -o $btrfs_o,autodefrag,discard=async,subvol=@snapshots $BTRFS /mnt/.snapshots
 mount -o $btrfs_o,autodefrag,discard=async,nodatacow,subvol=@var_log $BTRFS /mnt/var/log
 chattr +C /mnt/var/log
-mkdir /mnt/boot
+mkdir -p /mnt/boot
 mount $EFI /mnt/boot/
 
 cecho "Installing the base system"

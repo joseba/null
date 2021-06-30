@@ -167,5 +167,7 @@ umount -R /mnt
 cryptsetup close ROOT
 
 
+# wayland https://www.fosskers.ca/en/blog/wayland
+
 
 

@@ -69,9 +69,10 @@ mkdir -p /mnt/boot
 mount $EFI /mnt/boot/
 
 cecho "Installing the base system"
-pacstrap /mnt base base-devel linux intel-ucode linux-headers linux-firmware iwd btrfs-progs vim \
-    openssh dhcpcd \
-    tmux htop arch-wiki-docs snapper sudo reflector git pkgfile \
+pacstrap /mnt base base-devel linux intel-ucode linux-headers linux-firmware btrfs-progs \
+    dhcpcd iwd openssh \
+    
+    vim mux htop arch-wiki-docs snapper sudo reflector git pkgfile \
     zsh zsh-autosuggestions zsh-completions zsh-syntax-highlighting
 
 cecho "Generating fstab..."

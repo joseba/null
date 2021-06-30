@@ -155,11 +155,12 @@ systemctl enable iwd --root=/mnt
 systemctl enable snapper-timeline.timer --root=/mnt 
 systemctl enable snapper-cleanup.timer --root=/mnt 
 
-echo "Misc...."
+cecho "Misc...."
 cp -Rp  /var/lib/iwd /mnt/var/lib/
-
+sync
+umount /mnt/boot
 umount -R /mnt
-cryptsetup close wipe
+cryptsetup close ROOT
 reboot
 
 

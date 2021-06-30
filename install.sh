@@ -163,7 +163,6 @@ sync
 umount /mnt/boot
 umount -R /mnt
 cryptsetup close ROOT
-reboot
 
 
 

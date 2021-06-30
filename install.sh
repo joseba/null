@@ -76,7 +76,7 @@ pacstrap /mnt base base-devel linux intel-ucode linux-headers linux-firmware btr
     cronie vim tmux htop snapper sudo reflector git pkgfile lsof tcpdump \
     zsh zsh-autosuggestions zsh-completions zsh-syntax-highlighting \
     xorg-server xorg-xinit xorg-apps  xf86-video-intel mesa mesa-demos xf86-input-synaptics synaptics  xorg-fonts-100dpi xorg-fonts-75dpi  \
-    qtile alacritty 
+    qtile alacritty xautlock slock 
 
 cecho "Generating fstab..."
 genfstab -L /mnt > /mnt/etc/fstab

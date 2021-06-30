@@ -171,6 +171,6 @@ cryptsetup close ROOT
 
 
 # wayland https://www.fosskers.ca/en/blog/wayland
-xset dpms 180 & xss-lock -- slock & exec dwm
+# xset dpms 180 & xss-lock -- slock & exec dwm
 
 

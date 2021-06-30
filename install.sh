@@ -70,7 +70,7 @@ mount $EFI /mnt/boot/
 
 cecho "Installing the base system"
 pacstrap /mnt base base-devel linux intel-ucode linux-headers linux-firmware iwd btrfs-progs vim \
-    openssh 
+    openssh d
     tmux htop arch-wiki-docs snapper sudo reflector git pkgfile \
     zsh zsh-autosuggestions zsh-completions zsh-syntax-highlighting
 
@@ -154,6 +154,8 @@ cecho "Enabling services...."
 systemctl enable iwd --root=/mnt
 systemctl enable snapper-timeline.timer --root=/mnt 
 systemctl enable snapper-cleanup.timer --root=/mnt 
+systemctl enable dhcpcd --root=/mnt
+systemctl enable sshd --root=/mnt
 
 cecho "Misc...."
 cp -Rp  /var/lib/iwd /mnt/var/lib/

@@ -74,9 +74,9 @@ pacstrap /mnt base base-devel linux intel-ucode linux-headers linux-firmware btr
     alsa-utils \
     man-db man-pages arch-wiki-docs \
     cronie vim tmux htop snapper sudo reflector git pkgfile lsof tcpdump \
-    zsh zsh-autosuggestions zsh-completions zsh-syntax-highlighting \
+    fish \
     xorg-server xorg-xinit xorg-apps  xf86-video-intel mesa mesa-demos xf86-input-synaptics synaptics  xorg-fonts-100dpi xorg-fonts-75dpi  \
-    qtile alacritty  slock  xss-lock
+    qtile alacritty  slock  xss-lock feh ranger 
 
 cecho "Generating fstab..."
 genfstab -L /mnt > /mnt/etc/fstab
@@ -132,7 +132,7 @@ arch-chroot /mnt /bin/bash <<EOF
     echo "Setting users..."
     echo "root:${PASS}" | chpasswd
     groupadd -r autologin
-    useradd -m -g users -G wheel,autologin -s /bin/zsh $USER
+    useradd -m -g users -G wheel,autologin -s /bin/bash $USER
     echo "${USER}:${PASS}" | chpasswd
     echo $USER ALL=\(ALL\) NOPASSWD: ALL >> /etc/sudoers
 EOF

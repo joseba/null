@@ -137,6 +137,8 @@ arch-chroot /mnt /bin/bash <<EOF
     echo $USER ALL=\(ALL\) NOPASSWD: ALL >> /etc/sudoers
     
     git clone https://aur.archlinux.org/ttf-iosevka.git
+    cd ttf-iosevka
+    makepkg -si
     
 EOF
 

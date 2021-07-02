@@ -139,10 +139,7 @@ arch-chroot /mnt /bin/bash <<EOF
     git clone https://aur.archlinux.org/ttf-iosevka.git
     cd ttf-iosevka
     makepkg -si --noconfirm
-    
-    mkdir -p /etc/systemd/system/getty\@tty1.service.d
-    
-    
+   
 EOF
 
 cecho "Setting up loader conf..."
@@ -177,6 +174,7 @@ umount /mnt/boot
 umount -R /mnt
 cryptsetup close ROOT
 
+mkdir -p /etc/systemd/system/getty\@tty1.service.d
 
 # wayland https://www.fosskers.ca/en/blog/wayland
 # xset dpms 180 & xss-lock -- slock & exec dwm

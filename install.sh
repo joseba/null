@@ -138,7 +138,8 @@ arch-chroot /mnt /bin/bash <<EOF
     
     git clone https://aur.archlinux.org/ttf-iosevka.git
     cd ttf-iosevka
-    makepkg -si
+    makepkg -si -
+    
     
 EOF
 

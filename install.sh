@@ -76,7 +76,7 @@ pacstrap /mnt base base-devel linux intel-ucode linux-headers linux-firmware btr
     cronie vim tmux htop snapper sudo reflector git pkgfile lsof tcpdump \
     fish \
     xorg-server xorg-xinit xorg-apps  xf86-video-intel mesa mesa-demos xf86-input-synaptics synaptics  xorg-fonts-100dpi xorg-fonts-75dpi  ttf-dejavu \
-    qtile alacritty  slock  xss-lock feh ranger qutebrowser 
+    qtile alacritty  slock  xss-lock feh ranger qutebrowser picom 
 
 cecho "Generating fstab..."
 genfstab -L /mnt > /mnt/etc/fstab

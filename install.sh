@@ -135,6 +135,9 @@ arch-chroot /mnt /bin/bash <<EOF
     useradd -m -g users -G wheel,autologin -s /bin/bash $USER
     echo "${USER}:${PASS}" | chpasswd
     echo $USER ALL=\(ALL\) NOPASSWD: ALL >> /etc/sudoers
+    
+    git clone https://aur.archlinux.org/ttf-iosevka.git
+    
 EOF
 
 cecho "Setting up loader conf..."

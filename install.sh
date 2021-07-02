@@ -176,6 +176,7 @@ cryptsetup close ROOT
 
 mkdir -p /etc/systemd/system/getty\@tty1.service.d
 
+
 # wayland https://www.fosskers.ca/en/blog/wayland
 # xset dpms 180 & xss-lock -- slock & exec dwm
 

@@ -173,7 +173,10 @@ cp -Rp  /var/lib/iwd /mnt/var/lib/
 
 mkdir -p /mnt/etc/systemd/system/getty\@tty1.service.d
 cat > /mnt/etc/systemd/system/getty\@tty1.service.d/override.conf <<EOF
-
+[Service]
+ExecStart=
+ExecStart=-/usr/bin/agetty --autologin $USER --noclear \%I \$TERM
+EOF
 
 sync
 umount /mnt/boot

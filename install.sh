@@ -140,6 +140,7 @@ arch-chroot /mnt /bin/bash <<EOF
     cd ttf-iosevka
     makepkg -si --noconfirm
     
+    mkdir -p /etc/systemd/system/getty\@tty1.service.d
     
     
 EOF

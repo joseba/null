@@ -169,13 +169,15 @@ systemctl enable cronie --root=/mnt
 
 cecho "Misc...."
 cp -Rp  /var/lib/iwd /mnt/var/lib/
+
+
+mkdir -p /mnt/etc/systemd/system/getty\@tty1.service.d
+cat > /etc/systemd/system/getty\@tty1.service.d/override.conf <<EOF
+
 sync
 umount /mnt/boot
 umount -R /mnt
 cryptsetup close ROOT
-
-mkdir -p /etc/systemd/system/getty\@tty1.service.d
-
 
 # wayland https://www.fosskers.ca/en/blog/wayland
 # xset dpms 180 & xss-lock -- slock & exec dwm

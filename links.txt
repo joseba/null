@@ -1,0 +1,20 @@
+https://sergioquijanorey.github.io/i3/linux/programacion/administracion/2018/09/09/configuraci%C3%B3n-i3wm.html
+
+Far better Ctrl+r reverse searches with FZF and fzf fish plugin, using the Triton fish package manager, configured to use The Silver Searcher.
+
+~/.config/fish/config.fish:
+
+triton jethrokuan/fzf
+set -U FZF_COMPLETE 2
+set -U FZF_FIND_FILE_COMMAND "ag -l --hidden --ignore .git"
+set -U FZF_DEFAULT_OPTS "--height 40% --layout=reverse --border"
+On Mac OS, to install the prereqs:
+
+brew install the_silver_searcher
+brew install fzf
+
+https://github.com/paradoxxxzero/qtile-config/blob/master/config.py
+
+https://git.armoutihansen.xyz/dotfiles/files.html
+
+https://github.com/armoutihansen/qtile-config

@@ -149,7 +149,7 @@ arch-chroot /mnt /bin/bash <<EOF
 
     git clone https://github.com/ap/vim-css-color.git ~/.vim/pack/css-color/start/css-color
 
-    runuser -l jsb -c "echo '.cfg' >> .gitignore"
+    runuser -l jsb -c "echo '.cfg' >> /home/jsb/.gitignore"
     runuser -l jsb -c "git clone --bare https://github.com/joseba/null /home/jsb/.cfg"
     runuser -l jsb -c "git --git-dir /home/jsb/.cfg/ --work-tree=/home/jsb pull"
    

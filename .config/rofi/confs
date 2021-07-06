@@ -1,0 +1,2 @@
+CONF qtile=alacritty -e vim /home/jsb/.config/qtile/config.py
+CONF ME=alacritty -e vim /home/jsb/.config/rofi/confs

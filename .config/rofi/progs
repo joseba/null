@@ -1,0 +1,2 @@
+RUN qutebrowser=qutebrowser
+RUN chromium=chromium

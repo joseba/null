@@ -50,6 +50,6 @@ fi
 
 xset dpms 300
 #xss-lock -- /usr/bin/slock
-picom -b
+picom -b 
 feh --bg-center ~/.config/wallpaper.jpeg
 exec qtile start 

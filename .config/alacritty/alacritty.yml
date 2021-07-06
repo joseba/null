@@ -46,11 +46,11 @@ window:
   # Blank space added around the window in pixels. This padding is scaled
   # by DPI and the specified value is always added at both opposing sides.
   padding:
-    x: 3
-    y: 3
+    x: 1
+    y: 1
 
   # Spread additional padding evenly around the terminal content.
-  dynamic_padding: false
+  dynamic_padding: true
 
   # Window decorations
   #
@@ -150,7 +150,7 @@ font:
     style: Bold Italic
 
   # Point size
-  size: 8.0
+  size: 7.0
 
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
@@ -376,7 +376,7 @@ cursor:
     #   - ▇ Block
     #   - _ Underline
     #   - | Beam
-    shape: Beam
+    shape: Block
 
     # Cursor blinking state
     #
@@ -385,7 +385,7 @@ cursor:
     #   - Off: Disable blinking by default
     #   - On: Enable blinking by default
     #   - Always: Force the cursor to always blink
-    #blinking: Off
+    blinking: On
 
   # Vi mode cursor style
   #
@@ -850,3 +850,86 @@ cursor:
 
   # Print all received window events.
   #print_events: false
+
+draw_bold_text_with_bright_colors: true
+
+colorsold:
+  primary: 
+    backgorund: '#0e0e0e'
+    foreground: '#ffffff'
+  normal:
+    black: '#070120'
+    red: '#b9065d'
+    green: '#271ea0'
+    yellow: '#d93198'
+    blue: '#5c12a0'
+    magenta: '#575acc'
+    cyan: '#8209a0'
+    white: '#672aa6'
+
+  bright:
+    black: '#8b1480'
+    red: '#2915c8'
+    green: '#931fc8'
+    yellow: '#c80c9a'
+    blue: '#3837c8'
+    magenta: '#5a0fc8'
+    cyan: '#3d06c8'
+    white: '#8b98e5'
+
+  dim:
+    black: '#8b1480'
+    red: '#2915c8'
+    green: '#931fc8'
+    yellow: '#c80c9a'
+    blue: '#3837c8'
+    magenta: '#5a0fc8'
+    cyan: '#3d06c8'
+    white: '#8b98e5'
+
+
+colors:
+  # Default colours
+  primary:
+    background: '#000b1e'
+    foreground: '#0abdc6'
+
+  # Colors that should be used to draw the terminal cursor. If these are unset,
+  # the cursor colour will be the inverse of the cell colour.
+  # cursor:
+  #   text: '#2e2e2d'
+  #   # text: '#000000'
+  #   cursor: '#ffffff'
+
+  # Normal colors
+  normal:
+    black:   '#123e7c'
+    red:     '#ff0000'
+    green:   '#d300c4'
+    yellow:  '#f57800'
+    blue:    '#123e7c'
+    magenta: '#711c91'
+    cyan:    '#0abdc6'
+    white:   '#d7d7d5'
+
+  # Bright colors
+  bright:
+    black:   '#1c61c2'
+    red:     '#ff0000'
+    green:   '#d300c4'
+    yellow:  '#f57800'
+    blue:    '#00ff00'
+    magenta: '#711c91'
+    cyan:    '#0abdc6'
+    white:   '#d7d7d5'
+
+  # dim colors
+  dim:
+    black:   '#1c61c2'
+    red:     '#ff0000'
+    green:   '#d300c4'
+    yellow:  '#f57800'
+    blue:    '#123e7c'
+    magenta: '#711c91'
+    cyan:    '#0abdc6'
+    white:   '#d7d7d5'

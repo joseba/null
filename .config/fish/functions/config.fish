@@ -3,6 +3,7 @@ function config --wraps='/usr/bin/git --gir-dir=$HOME/.cfg/ --work-tree=$HOME' -
   /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME $argv; 
 end
 
+
 function fish_title
     set -l command (echo $_)
     if test $command = "fish"
@@ -11,4 +12,3 @@ function fish_title
         echo $argv
     end
 end
-

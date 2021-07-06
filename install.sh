@@ -71,12 +71,13 @@ mount $EFI /mnt/boot/
 cecho "Installing the base system"
 pacstrap /mnt base base-devel linux intel-ucode linux-headers linux-firmware btrfs-progs \
     dhcpcd iwd openssh \
-    alsa-utils \
-    man-db man-pages arch-wiki-docs \
-    cronie vim tmux htop snapper sudo reflector git pkgfile lsof tcpdump \
+    alsa-utils lm_sensors brightnessctl python-iwlib python-psutil \
+    man-db man-pages arch-wiki-docs pandoc plantuml \
+    cronie vim tmux htop snapper sudo reflector git pkgfile lsof tcpdump strace wget jq \
     fish \
-    xorg-server xorg-xinit xorg-apps  xf86-video-intel mesa mesa-demos xf86-input-synaptics synaptics  xorg-fonts-100dpi xorg-fonts-75dpi  ttf-dejavu \
-    qtile alacritty  slock  xss-lock feh ranger qutebrowser picom 
+    xorg-server xorg-xinit xorg-apps  xf86-video-intel mesa xf86-input-synaptics synaptics xorg-fonts-100dpi xorg-fonts-75dpi  ttf-dejavu \
+    qtile alacritty slock xss-lock feh ranger qutebrowser chromium rof \
+    code
 
 cecho "Generating fstab..."
 genfstab -L /mnt > /mnt/etc/fstab
@@ -135,10 +136,22 @@ arch-chroot /mnt /bin/bash <<EOF
     useradd -m -g users -G wheel,autologin -s /bin/bash $USER
     echo "${USER}:${PASS}" | chpasswd
     echo $USER ALL=\(ALL\) NOPASSWD: ALL >> /etc/sudoers
-    
+   
+    echo "Setting programs..." 
+
     git clone https://aur.archlinux.org/ttf-iosevka.git
     cd ttf-iosevka
     makepkg -si --noconfirm
+
+    git clone https://aur.archlinux.org/picom-rounded-corners.git
+    cd picom-rounded-corners/ 
+    makepkg -si --noconfirm
+
+    git clone https://github.com/ap/vim-css-color.git ~/.vim/pack/css-color/start/css-color
+
+    runuser -l jsb -c "echo '.cfg' >> .gitignore"
+    runuser -l jsb -c "git clone --bare https://github.com/joseba/null /home/jsb/.cfg"
+    runuser -l jsb -c "git --git-dir /home/jsb/.cfg/ --work-tree=/home/jsb pull"
    
 EOF
 

@@ -73,9 +73,9 @@ class Notify(base._TextBox):
 
     def set_notif_text(self, notif):
         notif.summary = re.sub("\n|\r","",notif.summary)
-        f = open('/tmp/test0.txt','+a')
-        f.write(notif.body)
-        f.close()
+        #f = open('/tmp/test0.txt','+a')
+        #f.write(notif.body)
+        #f.close()
 
         self.text = pangocffi.markup_escape_text(notif.summary)
 

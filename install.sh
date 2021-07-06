@@ -76,7 +76,7 @@ pacstrap /mnt base base-devel linux intel-ucode linux-headers linux-firmware btr
     cronie vim tmux htop snapper sudo reflector git pkgfile lsof tcpdump strace wget jq \
     fish \
     xorg-server xorg-xinit xorg-apps  xf86-video-intel mesa xf86-input-synaptics synaptics xorg-fonts-100dpi xorg-fonts-75dpi  ttf-dejavu \
-    qtile alacritty slock xss-lock feh ranger qutebrowser chromium rof \
+    qtile alacritty slock xss-lock feh ranger qutebrowser chromium rofi \
     code
 
 cecho "Generating fstab..."

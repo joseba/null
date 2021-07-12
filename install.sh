@@ -71,13 +71,13 @@ mount $EFI /mnt/boot/
 cecho "Installing the base system"
 pacstrap /mnt base base-devel linux intel-ucode linux-headers linux-firmware btrfs-progs \
     dhcpcd iwd openssh \
-    alsa-utils lm_sensors brightnessctl python-iwlib python-psutil \
+    alsa-utils lm_sensors brightnessctl python-iwlib python-psutil python-requests python-pip \
     man-db man-pages arch-wiki-docs pandoc plantuml \
-    cronie vim tmux htop snapper sudo reflector git pkgfile lsof tcpdump strace wget jq \
-    fish \
-    xorg-server xorg-xinit xorg-apps  xf86-video-intel mesa xf86-input-synaptics synaptics xorg-fonts-100dpi xorg-fonts-75dpi  ttf-dejavu \
+    cronie vim tmux htop snapper sudo reflector git pkgfile lsof tcpdump strace wget jq most bc \
+    fish newsboat \
+    xorg-server xorg-xinit xorg-apps  xf86-video-intel mesa xf86-input-synaptics synaptics xorg-fonts-100dpi xorg-fonts-75dpi ttf-dejavu ttf-font-awesome xorg-xfd \
     qtile alacritty slock xss-lock feh ranger qutebrowser chromium rofi \
-    code
+    code calcurse 
 
 cecho "Generating fstab..."
 genfstab -L /mnt > /mnt/etc/fstab
@@ -147,6 +147,7 @@ arch-chroot /mnt /bin/bash <<EOF
     cd picom-rounded-corners/ 
     makepkg -si --noconfirm
 
+    # todo as user
     git clone https://github.com/ap/vim-css-color.git ~/.vim/pack/css-color/start/css-color
 
     runuser -l jsb -c "echo '.cfg' >> /home/jsb/.gitignore"

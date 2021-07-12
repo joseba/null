@@ -64,8 +64,11 @@ def get_disk():
     return "{}% ".format(str(int(psutil.disk_usage('/').percent)))
 
 def get_weather():
-    res = requests.get("http://wttr.in/{}?format=%c%f ".format(location))
-    return res.text.replace("+","")
+    res = requests.get("http://wttr.in/{}?format=%C,%f ".format(location))
+    text, temp = res.text.replace('+','').split(',')
+    if "Clear" in text:
+        return "{}".format(temp)
+    return text
 
 keys = [
     # Common
@@ -97,6 +100,10 @@ keys = [
     Key([mod, "shift"], "r", lazy.restart(), desc="Restart Qtile"),
     Key([mod, "shift"], "q", lazy.shutdown(), desc="Quit Qtile"),
     Key([mod], "Tab", lazy.next_layout(), desc="Next Layout"),
+
+    #Specials
+    Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set +10%")),
+    Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 10%-")),
 ]
 
 old_keys = [

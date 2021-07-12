@@ -1,0 +1,43 @@
+* {
+    font: "Iosevka 16";
+    background-color: #000b1e65;
+    border-color: #0abdc6;
+    text-color: #ffffff;
+    spacing: 0;
+    width: 400px;
+    font: "Iosevka 16";
+}
+
+inputbar {
+    border: 0 0 3px 0;
+    children: [prompt,entry];
+}
+
+prompt {
+    padding: 16px;
+    border: 0 0 0 0;
+}
+
+textbox {
+    border: 0 0 0 0;
+    padding: 8px 16px;
+}
+
+entry {
+    padding: 16px;
+}
+
+listview {
+    cycle: false;
+    margin: 0 0 0 0;
+    scrollbar: false;
+}
+
+element {
+    border: 0 0 0 0;
+    padding: 16px;
+}
+
+element selected {
+    background-color: #c80c9a;
+}
